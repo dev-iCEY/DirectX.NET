@@ -2,14 +2,17 @@
 
 using System;
 using System.Runtime.InteropServices;
+using DXGI.NET.Interfaces;
 
 #endregion
 
-namespace DXGI.NET.Interfaces
+namespace DXGI.NET.V1_2.Interfaces
 {
-    [ComImport, Guid("77db970f-6276-48ba-ba28-070143b4392c"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    public interface IDXGIDevice1 : IDXGIDevice
+    [ComImport, Guid("05008617-fbfd-4051-a790-144884b4f6a9"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IDXGIDevice2 : IDXGIDevice1
     {
+        #region IDXGIDevice1 methods
+
         #region IDXGIDevice methods
 
         #region IDXGIObject methods
@@ -125,11 +128,21 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             SetMaximumFrameLatency(uint maxLatency);
+
+#if !DEXP
+        [PreserveSig]
+        new int
+#else
+        new void
+#endif
+            GetMaximumFrameLatency(out uint maxLatency);
+
+        #endregion
 
 #if !DEXP
         [PreserveSig]
@@ -137,6 +150,24 @@ namespace DXGI.NET.Interfaces
 #else
         void
 #endif
-            GetMaximumFrameLatency(out uint maxLatency);
+            OfferResources(uint numResources, IDXGIResource[] resources, OfferResourcePriority priority);
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            ReclaimResources(uint numResources, IDXGIResource[] resources,
+                [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0, ArraySubType = UnmanagedType.Bool)]
+                out bool[] discarded);
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            EnqueueSetEvent(IntPtr eventHandle);
     }
 }

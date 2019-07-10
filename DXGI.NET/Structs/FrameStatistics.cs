@@ -9,20 +9,10 @@ namespace DXGI.NET
     [StructLayout(LayoutKind.Sequential)]
     public struct FrameStatistics
     {
-        public uint PresentCount;
-        public uint PresentRefreshCount;
-        public uint SyncRefreshCount;
-        public LargeInteger SyncQPCTime;
-        public LargeInteger SyncGPUTime;
-
-        public FrameStatistics(uint presentCount, uint presentRefreshCount, uint syncRefreshCount,
-            LargeInteger syncQpcTime, LargeInteger syncGpuTime)
-        {
-            PresentCount = presentCount;
-            PresentRefreshCount = presentRefreshCount;
-            SyncRefreshCount = syncRefreshCount;
-            SyncQPCTime = syncQpcTime;
-            SyncGPUTime = syncGpuTime;
-        }
+        public uint PresentCount { get; set; }
+        public uint PresentRefreshCount { get; set; }
+        public uint SyncRefreshCount { get; set; }
+        public LargeInteger SyncQpcTime { get; set; }
+        public LargeInteger SyncGpuTime { get; set; }
     }
 }

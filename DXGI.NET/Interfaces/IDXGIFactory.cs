@@ -110,7 +110,7 @@ namespace DXGI.NET.Interfaces
             CreateSwapChain
             (
                 [MarshalAs(UnmanagedType.IUnknown)] object device,
-                [In] ref SwapChainDesc desc,
+                [In] ref SwapChainDescription desc,
                 out IDXGISwapChain swapChain
             );
 

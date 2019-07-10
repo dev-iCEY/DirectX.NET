@@ -9,17 +9,9 @@ namespace DXGI.NET
     [StructLayout(LayoutKind.Sequential)]
     public struct Rgba
     {
-        public float R;
-        public float G;
-        public float B;
-        public float A;
-
-        public Rgba(float r, float g, float b, float a)
-        {
-            R = r;
-            G = g;
-            B = b;
-            A = a;
-        }
+        public float Red { get; set; }
+        public float Green { get; set; }
+        public float Blue { get; set; }
+        public float Alpha { get; set; }
     }
 }

@@ -10,9 +10,9 @@ namespace DXGI.NET
     public struct DisplayColorSpace
     {
         [field: MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValArray, SizeConst = 16)]
-        public float[][] PrimaryCoodrinates { get; }
+        public float[][] PrimaryCoordinates { get; set; }
 
         [field: MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValArray, SizeConst = 32)]
-        public float[][] WhitePoints { get; }
+        public float[][] WhitePoints { get; set; }
     }
 }

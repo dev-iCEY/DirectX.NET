@@ -2,6 +2,7 @@
 
 using System;
 using DXGI.NET.Interfaces;
+using DXGI.NET.V1_2.Interfaces;
 
 #endregion
 
@@ -32,7 +33,7 @@ namespace DXGI.NET
                 return result;
             }
 
-            if (riid == typeof(IDXGIFactory1).GUID)
+            if (riid == typeof(IDXGIFactory1).GUID || riid == typeof(IDXGIFactory2).GUID)
             {
 #if !DEXP
                 int result =
@@ -45,7 +46,8 @@ namespace DXGI.NET
             }
 
             throw new ArgumentException(
-                $"Type \"{factoryType.FullName}\" is not valid for this method. Please use IDXGIFactory or IDXGIFactory1.", nameof(factory));
+                $"Type \"{factoryType.FullName}\" is not valid for this method. Please use IDXGIFactory or IDXGIFactory1 or IDXGIFactory2.",
+                nameof(factory));
         }
     }
 }

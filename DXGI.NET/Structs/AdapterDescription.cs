@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 
 namespace DXGI.NET
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct AdapterDesc1
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    public struct AdapterDescription
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 128)]
-        public readonly ushort[] Description;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+        public readonly string Description;
 
         public uint VendorId;
         public uint DeviceId;
@@ -23,9 +23,5 @@ namespace DXGI.NET
         public UIntPtr SharedSystemMemory;
 
         public Luid AdapterLuid;
-
-        public AdapterFlag Flags;
-
-        public string HumanDescription => new string(Description.ToCharArray());
     }
 }

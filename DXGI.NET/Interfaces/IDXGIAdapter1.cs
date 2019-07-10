@@ -88,7 +88,7 @@ namespace DXGI.NET.Interfaces
 #endif
             GetDesc
             (
-                out AdapterDesc desc
+                out AdapterDescription desc
             );
 
 
@@ -112,6 +112,6 @@ namespace DXGI.NET.Interfaces
 #else
         void
 #endif
-            GetDesc1(out AdapterDesc1 adapterDesc1);
+            GetDesc1(out AdapterDescription1 adapterDesc1);
     }
 }

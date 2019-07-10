@@ -82,7 +82,7 @@ namespace DXGI.NET.Interfaces
 #endif
             CreateSurface
             (
-                [In] ref SurfaceDesc surfaceDesc,
+                [In] ref SurfaceDescription surfaceDesc,
                 uint numSurfaces,
                 Usage usage,
                 ref SharedResource sharedResource,

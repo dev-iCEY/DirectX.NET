@@ -9,17 +9,10 @@ namespace DXGI.NET
     [StructLayout(LayoutKind.Sequential)]
     public struct GammaControl
     {
-        public Rgb Scale;
-        public Rgb Offset;
+        public Rgb Scale { get; set; }
+        public Rgb Offset{ get; set; }
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1025)]
-        public Rgb[] GammaCurve;
-
-        public GammaControl(Rgb scale, Rgb offset, Rgb[] gammaCurve)
-        {
-            Scale = scale;
-            Offset = offset;
-            GammaCurve = gammaCurve;
-        }
+        [field: MarshalAs(UnmanagedType.ByValArray, SizeConst = 1025)]
+        public Rgb[] GammaCurve{ get; set; }
     }
 }

@@ -2,14 +2,18 @@
 
 using System;
 using System.Runtime.InteropServices;
+using DXGI.NET.Duplication.Interfaces;
+using DXGI.NET.Interfaces;
 
 #endregion
 
-namespace DXGI.NET.Interfaces
+namespace DXGI.NET.V1_2.Interfaces
 {
-    [ComImport, Guid("ae02eedb-c735-4690-8d52-5a8dc20213aa"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    public interface IDXGIOutput : IDXGIObject
+    [ComImport, Guid("00cddea8-939b-4b83-a340-a685226666cc"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IDXGIOutput1 : IDXGIOutput
     {
+        #region IDXGIOutput methods
+
         #region IDXGIObject methods
 
 #if !DEXP
@@ -68,9 +72,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             GetDesc
             (
@@ -79,9 +83,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             GetDisplayModeList
             (
@@ -94,9 +98,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             FindClosestMatchingMode
             (
@@ -107,17 +111,17 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             WaitForVBlank();
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             TakeOwnership
             (
@@ -125,13 +129,13 @@ namespace DXGI.NET.Interfaces
                 [MarshalAs(UnmanagedType.Bool)] bool isExclusive
             );
 
-        void ReleaseOwnership();
+        new void ReleaseOwnership();
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             GetGammaControlCapabilities
             (
@@ -140,9 +144,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             SetGammaControl
             (
@@ -151,9 +155,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new  void
 #endif
             GetGammaControl
             (
@@ -162,9 +166,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             SetDisplaySurface
             (
@@ -173,9 +177,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             GetDisplaySurfaceData
             (
@@ -184,13 +188,66 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             GetFrameStatistics
             (
                 out FrameStatistics frameStatistics
+            );
+
+        #endregion
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            GetDisplayModeList1
+            (
+                Format format,
+                uint flags,
+                [In, Out] uint numModes,
+                [In, Out, Optional, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)]
+                ModeDescription1[] modesDesc
+            );
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            FindClosestMatchingMode1
+            (
+                [In] ref ModeDescription1 modeMatch,
+                out ModeDescription1 closestMatch,
+                [MarshalAs(UnmanagedType.IUnknown)] out object concernedDevice
+            );
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            GetDisplaySurfaceData1
+            (
+                IDXGISurface destination
+            );
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            DuplicateOutput
+            (
+                [MarshalAs(UnmanagedType.IUnknown)] object device,
+                out IDXGIOutputDuplication outputDuplication
             );
     }
 }

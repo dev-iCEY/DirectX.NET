@@ -1,16 +1,15 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+using DXGI.NET.Interfaces;
 
-#endregion
-
-namespace DXGI.NET.Interfaces
+namespace DXGI.NET.V1_2.Interfaces
 {
-    [ComImport, Guid("77db970f-6276-48ba-ba28-070143b4392c"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    public interface IDXGIDevice1 : IDXGIDevice
+    [ComImport, Guid("0AA1AE0A-FA0E-4B84-8644-E05FF8E5ACB5"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IDXGIAdapter2 : IDXGIAdapter1
     {
-        #region IDXGIDevice methods
+        #region IDXGIAdapter1 methods
+
+        #region IDXGIAdapter methods
 
         #region IDXGIObject methods
 
@@ -74,21 +73,10 @@ namespace DXGI.NET.Interfaces
 #else
         new void
 #endif
-            GetAdapter(out IDXGIAdapter adapter);
-
-#if !DEXP
-        [PreserveSig]
-        new int
-#else
-        new void
-#endif
-            CreateSurface
+            EnumOutputs
             (
-                [In] ref SurfaceDescription surfaceDesc,
-                uint numSurfaces,
-                Usage usage,
-                ref SharedResource sharedResource,
-                out IDXGISurface surface
+                uint outputIndex,
+                out IDXGIOutput output
             );
 
 #if !DEXP
@@ -97,21 +85,11 @@ namespace DXGI.NET.Interfaces
 #else
         new void
 #endif
-            QueryResourceResidency
+            GetDesc
             (
-                [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
-                IDXGIResource[] resources,
-                out Residency residencyStatus,
-                uint numResources
+                out AdapterDescription desc
             );
 
-#if !DEXP
-        [PreserveSig]
-        new int
-#else
-        new void
-#endif
-            SetGPUThreadPriority(int priority);
 
 #if !DEXP
         [PreserveSig]
@@ -119,7 +97,21 @@ namespace DXGI.NET.Interfaces
 #else
         new void
 #endif
-            GetGPUThreadPriority(out int priority);
+            CheckInterfaceSupport
+            (
+                [In] ref Guid interfaceName,
+                out LargeInteger pUmdVersion
+            );
+
+        #endregion
+
+#if !DEXP
+        [PreserveSig]
+        new int
+#else
+        new void
+#endif
+            GetDesc1(out AdapterDescription1 adapterDesc1);
 
         #endregion
 
@@ -129,14 +121,6 @@ namespace DXGI.NET.Interfaces
 #else
         void
 #endif
-            SetMaximumFrameLatency(uint maxLatency);
-
-#if !DEXP
-        [PreserveSig]
-        int
-#else
-        void
-#endif
-            GetMaximumFrameLatency(out uint maxLatency);
+            GetDesc2(out AdapterDescription2 adapterDesc1);
     }
 }

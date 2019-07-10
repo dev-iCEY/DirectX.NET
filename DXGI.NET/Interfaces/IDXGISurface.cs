@@ -91,7 +91,7 @@ namespace DXGI.NET.Interfaces
 #endif
             GetDesc
             (
-                out SurfaceDesc surfaceDesc
+                out SurfaceDescription surfaceDesc
             );
 
 #if !DEXP

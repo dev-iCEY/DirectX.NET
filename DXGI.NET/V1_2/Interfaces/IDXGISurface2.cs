@@ -2,15 +2,20 @@
 
 using System;
 using System.Runtime.InteropServices;
+using DXGI.NET.Interfaces;
 
 #endregion
 
-namespace DXGI.NET.Interfaces
+namespace DXGI.NET.V1_2.Interfaces
 {
-    [ComImport, Guid("77db970f-6276-48ba-ba28-070143b4392c"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    public interface IDXGIDevice1 : IDXGIDevice
+    [ComImport, Guid("aba496dd-b617-4cb8-a866-bc44d7eb1fa2"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IDXGISurface2 : IDXGISurface1
     {
-        #region IDXGIDevice methods
+        #region IDXGISurface1 methods
+
+        #region IDXGISurface methods
+
+        #region IDXGIDeviceSubObject
 
         #region IDXGIObject methods
 
@@ -74,7 +79,13 @@ namespace DXGI.NET.Interfaces
 #else
         new void
 #endif
-            GetAdapter(out IDXGIAdapter adapter);
+            GetDevice
+            (
+                ref Guid riid,
+                [MarshalAs(UnmanagedType.IUnknown)] out object device
+            );
+
+        #endregion
 
 #if !DEXP
         [PreserveSig]
@@ -82,13 +93,9 @@ namespace DXGI.NET.Interfaces
 #else
         new void
 #endif
-            CreateSurface
+            GetDesc
             (
-                [In] ref SurfaceDescription surfaceDesc,
-                uint numSurfaces,
-                Usage usage,
-                ref SharedResource sharedResource,
-                out IDXGISurface surface
+                out SurfaceDescription surfaceDesc
             );
 
 #if !DEXP
@@ -97,12 +104,10 @@ namespace DXGI.NET.Interfaces
 #else
         new void
 #endif
-            QueryResourceResidency
+            Map
             (
-                [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
-                IDXGIResource[] resources,
-                out Residency residencyStatus,
-                uint numResources
+                out MappedRect mappedRect,
+                Map flags
             );
 
 #if !DEXP
@@ -111,7 +116,9 @@ namespace DXGI.NET.Interfaces
 #else
         new void
 #endif
-            SetGPUThreadPriority(int priority);
+            UnMap();
+
+        #endregion
 
 #if !DEXP
         [PreserveSig]
@@ -119,7 +126,23 @@ namespace DXGI.NET.Interfaces
 #else
         new void
 #endif
-            GetGPUThreadPriority(out int priority);
+            GetDC
+            (
+                [MarshalAs(UnmanagedType.Bool)] bool discard,
+                out IntPtr dcHandle
+            );
+
+#if !DEXP
+        [PreserveSig]
+        new int
+#else
+        new void
+#endif
+            ReleaseDC
+            (
+                [In, MarshalAs(UnmanagedType.LPStruct)]
+                ref Rect dirtyRect
+            );
 
         #endregion
 
@@ -129,14 +152,6 @@ namespace DXGI.NET.Interfaces
 #else
         void
 #endif
-            SetMaximumFrameLatency(uint maxLatency);
-
-#if !DEXP
-        [PreserveSig]
-        int
-#else
-        void
-#endif
-            GetMaximumFrameLatency(out uint maxLatency);
+            GetResource(ref Guid riid, out IntPtr resourcePtr, out uint subResourceIndex);
     }
 }

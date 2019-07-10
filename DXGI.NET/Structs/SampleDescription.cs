@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Runtime.InteropServices;
 
 #endregion
@@ -8,8 +7,9 @@ using System.Runtime.InteropServices;
 namespace DXGI.NET
 {
     [StructLayout(LayoutKind.Sequential)]
-    public struct SharedResource
+    public struct SampleDescription
     {
-        public IntPtr Handle{ get; set; }
+        public uint Count { get; set; }
+        public uint Quality { get; set; }
     }
 }

@@ -9,13 +9,7 @@ namespace DXGI.NET
     [StructLayout(LayoutKind.Sequential)]
     public struct Rational
     {
-        public uint Numerator;
-        public uint Denominator;
-
-        public Rational(uint numerator, uint denominator)
-        {
-            Numerator = numerator;
-            Denominator = denominator;
-        }
+        public uint Numerator{ get; set; }
+        public uint Denominator{ get; set; }
     }
 }

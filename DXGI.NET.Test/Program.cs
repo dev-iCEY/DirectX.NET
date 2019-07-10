@@ -1,9 +1,9 @@
 ﻿#region Usings
 
 using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using DXGI.NET.Interfaces;
+using DXGI.NET.V1_2.Interfaces;
 
 #endregion
 
@@ -13,51 +13,62 @@ namespace DXGI.NET.Test
     {
         public static int Main()
         {
-            int result = Factory.CreateFactory(out IDXGIFactory factory);
-
+            int result = Dxgi1Test();
             if (result != 0)
             {
-                Exception ex = Marshal.GetExceptionForHR(result);
-                if (ex != null)
-                {
-                    throw ex;
-                }
+                Console.WriteLine("{0} method Failed: {1}", "Dxgi1Test", Marshal.GetExceptionForHR(result).Message);
             }
 
-            LinkedList<IDXGIAdapter> adapters = new LinkedList<IDXGIAdapter>();
+            return 0;
+        }
+
+        private static int Dxgi1Test()
+        {
+            int hResult = Factory.CreateFactory(out IDXGIFactory factory2);
+            if (hResult != 0)
+            {
+                return hResult;
+            }
 
             uint adapterId = 0;
-            while (factory.EnumAdapters(adapterId, out IDXGIAdapter adapter) == 0)
+            bool hasAnyAdapters = false;
+
+            while (factory2.EnumAdapters(adapterId, out IDXGIAdapter adapter) == 0)
             {
-                adapters.AddLast(adapter);
-                adapterId++;
-            }
-
-            adapterId = 0;
-
-            foreach (IDXGIAdapter adapter in adapters)
-            {
-                result = adapter.GetDesc(out AdapterDesc adapterDesc);
-                if (result != 0)
+                hasAnyAdapters = true;
+                if (adapter.GetDesc(out AdapterDescription adapterDescription) == 0)
                 {
-                    continue;
-                }
+                    Console.WriteLine("Adapter: {0}", adapterDescription.Description);
 
-                Console.WriteLine("| Adapter: {0} | {1}", adapterId, adapterDesc.HumanDescription);
-                uint outputId = 0;
-                while (adapter.EnumOutputs(outputId, out IDXGIOutput output) == 0)
-                {
-                    if (output.GetDesc(out OutputDesc outputDesc) == 0)
+                    uint outputId = 0;
+                    bool hasAnyOutput = false;
+                    while (adapter.EnumOutputs(outputId, out IDXGIOutput output) == 0)
                     {
-                        Console.WriteLine("| Output: {0,2} | {1}", outputId, outputDesc.HumanDeviceName);
+                        hasAnyOutput = true;
+
+                        if (output.GetDesc(out OutputDescription outputDescription) == 0)
+                        {
+                            Console.WriteLine("Output: {0}", outputDescription.DeviceName);
+                        }
+
+                        outputId++;
                     }
 
-                    outputId++;
+                    if (!hasAnyOutput)
+                    {
+                        Console.WriteLine("Adapter: {0}, have no outputs.", adapterDescription.Description);
+                    }
                 }
+
                 adapterId++;
             }
 
-            return Marshal.ReleaseComObject(factory); // if there is is non Zero value, we need to do something with interfaces.
+            if (!hasAnyAdapters)
+            {
+                Console.WriteLine("No adapters found!");
+            }
+
+            return Marshal.ReleaseComObject(factory2);
         }
     }
 }

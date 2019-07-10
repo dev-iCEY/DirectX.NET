@@ -86,7 +86,7 @@ namespace DXGI.NET.Interfaces
 #endif
             GetDesc
             (
-                out AdapterDesc desc
+                out AdapterDescription desc
             );
 
 

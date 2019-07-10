@@ -2,14 +2,17 @@
 
 using System;
 using System.Runtime.InteropServices;
+using DXGI.NET.Interfaces;
 
 #endregion
 
-namespace DXGI.NET.Interfaces
+namespace DXGI.NET.V1_2.Interfaces
 {
-    [ComImport, Guid("310d36a0-d2e7-4c0a-aa04-6a9d23b8886a"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    public interface IDXGISwapChain : IDXGIDeviceSubObject
+    [ComImport, Guid("790a45f7-0d42-4876-983a-0a55cfe6f4aa"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IDXGISwapChain1 : IDXGISwapChain
     {
+        #region IDXGISwapChain methods
+
         #region IDXGIDeviceSubObject
 
         #region IDXGIObject methods
@@ -84,9 +87,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             Present
             (
@@ -96,9 +99,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             GetBuffer
             (
@@ -109,9 +112,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             SetFullscreenState
             (
@@ -121,9 +124,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             GetFullscreenState
             (
@@ -133,9 +136,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             GetDesc
             (
@@ -144,9 +147,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             ResizeBuffers
             (
@@ -159,9 +162,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             ResizeTarget
             (
@@ -170,9 +173,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             GetContainingOutput
             (
@@ -181,9 +184,9 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             GetFrameStatistics
             (
@@ -192,13 +195,98 @@ namespace DXGI.NET.Interfaces
 
 #if !DEXP
         [PreserveSig]
-        int
+        new int
 #else
-        void
+        new void
 #endif
             GetLastPresentCount
             (
                 out uint lastPresentCount
             );
+
+        #endregion
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            GetDesc1(out SwapChainDescription1 description1);
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            GetFullscreenDesc(out SwapChainFullscreenDescription fullscreenDescription);
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            GetHwnd(out IntPtr windowHandle);
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            GetCoreWindow(ref Guid refiid, [MarshalAs(UnmanagedType.IUnknown)] out object unknownObject);
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            Present1(uint syncInterval, PresentFlags flags, [In] ref PresentParameters presentParameters);
+
+        [return: MarshalAs(UnmanagedType.Bool)]
+        bool IsTemporaryMonoSupported();
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            GetRestrictToOutput(out IDXGIOutput restrictToOutput);
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            SetBackgroundColor([In] ref Rgba color);
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            GetBackgroundColor(out Rgba color);
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            SetRotation(ModeRotation rotation);
+
+#if !DEXP
+        [PreserveSig]
+        int
+#else
+        void
+#endif
+            GetRotation(out ModeRotation rotation);
     }
 }
