@@ -3,7 +3,7 @@
 using System;
 using System.Runtime.InteropServices;
 using DXGI.NET.Interfaces;
-using DXGI.NET.V1_2.Interfaces;
+using DXGI.NET.V1_3;
 
 #endregion
 
@@ -13,11 +13,18 @@ namespace DXGI.NET.Test
     {
         public static int Main()
         {
-            int result = Dxgi1Test();
-            if (result != 0)
+            Matrix3X2F matrix = new Matrix3X2F
             {
-                Console.WriteLine("{0} method Failed: {1}", "Dxgi1Test", Marshal.GetExceptionForHR(result).Message);
-            }
+                [0u, 0u] = 0.0f,
+                [0u, 1u] = 1.0f,
+                [1u, 0u] = 2.0f,
+                [1u, 1u] = 3.0f,
+                [2u, 0u] = 4.0f,
+                [2u, 1u] = 5.0f
+            };
+
+
+            Console.WriteLine(matrix);
 
             return 0;
         }

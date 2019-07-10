@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -136,6 +137,21 @@
     <Compile Include="V1_2\Interfaces\IDXGISurface2.cs" />
     <Compile Include="V1_2\Structs\ModeDescription1.cs" />
     <Compile Include="V1_2\Structs\SwapChainFullscreenDescription.cs" />
+    <Compile Include="V1_3\Enums\CreateFactoryFlags.cs" />
+    <Compile Include="V1_3\Enums\FramePresentationMode.cs" />
+    <Compile Include="V1_3\Enums\MultiPlaneOverlayYCbCrFlags.cs" />
+    <Compile Include="V1_3\Enums\OverlaySupportFlag.cs" />
+    <Compile Include="V1_3\Interfaces\IDXGIDecodeSwapChain.cs" />
+    <Compile Include="V1_3\Interfaces\IDXGIDevice3.cs" />
+    <Compile Include="V1_3\Interfaces\IDXGIFactory3.cs" />
+    <Compile Include="V1_3\Interfaces\IDXGIFactoryMedia.cs" />
+    <Compile Include="V1_3\Interfaces\IDXGIOutput2.cs" />
+    <Compile Include="V1_3\Interfaces\IDXGIOutput3.cs" />
+    <Compile Include="V1_3\Interfaces\IDXGISwapChain2.cs" />
+    <Compile Include="V1_3\Interfaces\IDXGISwapChainMedia.cs" />
+    <Compile Include="V1_3\Structs\DecodeSwapChainDescription.cs" />
+    <Compile Include="V1_3\Structs\FrameStatisticsMedia.cs" />
+    <Compile Include="V1_3\Structs\Matrix3X2F.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Delegates\" />
