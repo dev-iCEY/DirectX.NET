@@ -10,12 +10,12 @@ using DirectX.NET.Interfaces;
 
 namespace DirectX.DXGI.NET
 {
-    public class DeviceSubObject : Object, IDeviceSubObject
+    public class DXGIDeviceSubObject : DXGIObject, IDXGIDeviceSubObject
     {
-        protected new const uint LastMethodId = Object.LastMethodId + 1u;
-        protected new readonly int MethodsCount = typeof(IDeviceSubObject).GetMethods().Length;
+        protected new const uint LastMethodId = DXGIObject.LastMethodId + 1u;
+        protected new readonly int MethodsCount = typeof(IDXGIDeviceSubObject).GetMethods().Length;
 
-        public DeviceSubObject(IntPtr objectPtr) : base(objectPtr)
+        public DXGIDeviceSubObject(IntPtr objectPtr) : base(objectPtr)
         {
             AddMethodsToVTableList(base.MethodsCount, MethodsCount);
             MethodsCount = base.MethodsCount + MethodsCount;
@@ -28,7 +28,7 @@ namespace DirectX.DXGI.NET
             return result;
         }
 
-        [ComMethodId(Object.LastMethodId + 1), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 1), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetDeviceDelegate(IntPtr thisPtr, in Guid riid, out IntPtr devicePtr);
     }
 }

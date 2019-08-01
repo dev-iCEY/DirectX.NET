@@ -15,7 +15,7 @@ namespace DirectX.DXGI.NET
 
         internal static IntPtr CreateFactory()
         {
-            int result = CreateDXGIFactory(typeof(IFactory).GUID, out IntPtr factoryPtr);
+            int result = CreateDXGIFactory(typeof(IDXGIFactory).GUID, out IntPtr factoryPtr);
 
             if (result != 0)
             {
@@ -27,7 +27,7 @@ namespace DirectX.DXGI.NET
 
         internal static IntPtr CreateFactory1()
         {
-            int result = CreateDXGIFactory1(typeof(IFactory1).GUID, out IntPtr factoryPtr);
+            int result = CreateDXGIFactory1(typeof(IDXGIFactory1).GUID, out IntPtr factoryPtr);
 
             if (result != 0)
             {

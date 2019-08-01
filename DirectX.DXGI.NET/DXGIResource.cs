@@ -9,12 +9,12 @@ using DirectX.NET;
 
 namespace DirectX.DXGI.NET
 {
-    public class Resource : DeviceSubObject, IResource
+    public class DXGIResource : DXGIDeviceSubObject, IDXGIResource
     {
-        protected new const uint LastMethodId = DeviceSubObject.LastMethodId + 4u;
-        protected new readonly int MethodsCount = typeof(IResource).GetMethods().Length;
+        protected new const uint LastMethodId = DXGIDeviceSubObject.LastMethodId + 4u;
+        protected new readonly int MethodsCount = typeof(IDXGIResource).GetMethods().Length;
 
-        public Resource(IntPtr objectPtr) : base(objectPtr)
+        public DXGIResource(IntPtr objectPtr) : base(objectPtr)
         {
             AddMethodsToVTableList(base.MethodsCount, MethodsCount);
             MethodsCount = base.MethodsCount + MethodsCount;
@@ -40,16 +40,16 @@ namespace DirectX.DXGI.NET
             return GetMethodDelegate<GetEvictionPriorityDelegate>().Invoke(this, out evictionPriority);
         }
 
-        [ComMethodId(DeviceSubObject.LastMethodId + 1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIDeviceSubObject.LastMethodId + 1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetSharedHandleDelegate(IntPtr thisPtr, out IntPtr sharedHandlePtr);
 
-        [ComMethodId(DeviceSubObject.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIDeviceSubObject.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetUsageDelegate(IntPtr thisPtr, out Usage usage);
 
-        [ComMethodId(DeviceSubObject.LastMethodId + 3u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIDeviceSubObject.LastMethodId + 3u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int SetEvictionPriorityDelegate(IntPtr thisPtr, uint priority);
 
-        [ComMethodId(DeviceSubObject.LastMethodId + 4u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIDeviceSubObject.LastMethodId + 4u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetEvictionPriorityDelegate(IntPtr thisPtr, out uint priority);
     }
 }

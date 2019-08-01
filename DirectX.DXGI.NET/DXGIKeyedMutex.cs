@@ -9,12 +9,12 @@ using DirectX.NET;
 
 namespace DirectX.DXGI.NET
 {
-    public class KeyedMutex : DeviceSubObject, IKeyedMutex
+    public class DXGIKeyedMutex : DXGIDeviceSubObject, IDXGIKeyedMutex
     {
-        protected new const uint LastMethodId = DeviceSubObject.LastMethodId + 2u;
-        protected new readonly int MethodsCount = typeof(IKeyedMutex).GetMethods().Length;
+        protected new const uint LastMethodId = DXGIDeviceSubObject.LastMethodId + 2u;
+        protected new readonly int MethodsCount = typeof(IDXGIKeyedMutex).GetMethods().Length;
 
-        public KeyedMutex(IntPtr objectPtr) : base(objectPtr)
+        public DXGIKeyedMutex(IntPtr objectPtr) : base(objectPtr)
         {
             AddMethodsToVTableList(base.MethodsCount, MethodsCount);
             MethodsCount = base.MethodsCount + MethodsCount;
@@ -30,10 +30,10 @@ namespace DirectX.DXGI.NET
             return GetMethodDelegate<ReleaseSyncDelegate>().Invoke(this, key);
         }
 
-        [ComMethodId(DeviceSubObject.LastMethodId + 1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIDeviceSubObject.LastMethodId + 1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int AcquireSyncDelegate(IntPtr thisPtr, ulong key, uint ms);
 
-        [ComMethodId(DeviceSubObject.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIDeviceSubObject.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int ReleaseSyncDelegate(IntPtr thisPtr, ulong key);
     }
 }

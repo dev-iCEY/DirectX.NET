@@ -9,12 +9,12 @@ using DirectX.NET;
 
 namespace DirectX.DXGI.NET
 {
-    public class Surface : DeviceSubObject, ISurface
+    public class DXGISurface : DXGIDeviceSubObject, IDXGISurface
     {
-        protected new const uint LastMethodId = DeviceSubObject.LastMethodId + 3u;
-        protected new readonly int MethodsCount = typeof(ISurface).GetMethods().Length;
+        protected new const uint LastMethodId = DXGIDeviceSubObject.LastMethodId + 3u;
+        protected new readonly int MethodsCount = typeof(IDXGISurface).GetMethods().Length;
 
-        public Surface(IntPtr objectPtr) : base(objectPtr)
+        public DXGISurface(IntPtr objectPtr) : base(objectPtr)
         {
             AddMethodsToVTableList(base.MethodsCount, MethodsCount);
             MethodsCount = base.MethodsCount + MethodsCount;
@@ -35,13 +35,13 @@ namespace DirectX.DXGI.NET
             return GetMethodDelegate<UnMapDelegate>().Invoke(this);
         }
 
-        [ComMethodId(DeviceSubObject.LastMethodId + 1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIDeviceSubObject.LastMethodId + 1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetDescDelegate(IntPtr thisPtr, out SurfaceDescription surfaceDescription);
 
-        [ComMethodId(DeviceSubObject.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIDeviceSubObject.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int MapDelegate(IntPtr thisPtr, out MappedRect rect, Map flags);
 
-        [ComMethodId(DeviceSubObject.LastMethodId + 3u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIDeviceSubObject.LastMethodId + 3u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int UnMapDelegate(IntPtr thisPtr);
     }
 }

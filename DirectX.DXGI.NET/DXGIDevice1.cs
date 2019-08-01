@@ -9,12 +9,12 @@ using DirectX.NET;
 
 namespace DirectX.DXGI.NET
 {
-    public class Device1 : Device, IDevice1
+    public class DXGIDevice1 : DXGIDevice, IDXGIDevice1
     {
-        protected new const uint LastMethodId = Device.LastMethodId + 2u;
-        protected new readonly int MethodsCount = typeof(IDevice1).GetMethods().Length;
+        protected new const uint LastMethodId = DXGIDevice.LastMethodId + 2u;
+        protected new readonly int MethodsCount = typeof(IDXGIDevice1).GetMethods().Length;
 
-        public Device1(IntPtr objectPtr) : base(objectPtr)
+        public DXGIDevice1(IntPtr objectPtr) : base(objectPtr)
         {
             AddMethodsToVTableList(base.MethodsCount, MethodsCount);
             MethodsCount = base.MethodsCount + MethodsCount;
@@ -30,10 +30,10 @@ namespace DirectX.DXGI.NET
             return GetMethodDelegate<GetMaximumFrameLatencyDelegate>().Invoke(this, out maxLatency);
         }
 
-        [ComMethodId(Device.LastMethodId + 1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIDevice.LastMethodId + 1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int SetMaximumFrameLatencyDelegate(IntPtr thisPtr, uint maxLatency);
 
-        [ComMethodId(Device.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIDevice.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetMaximumFrameLatencyDelegate(IntPtr thisPtr, out uint maxLatency);
     }
 }

@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.3</LangVersion>
+    <DocumentationFile>bin\Debug\DirectX.DXGI.NET.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\DirectX.DXGI.NET.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -42,15 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapter.cs" />
-    <Compile Include="Adapter1.cs" />
-    <Compile Include="Device.cs" />
-    <Compile Include="Device1.cs" />
-    <Compile Include="Factory1.cs" />
-    <Compile Include="DeviceSubObject.cs" />
-    <Compile Include="Surface.cs" />
-    <Compile Include="KeyedMutex.cs" />
-    <Compile Include="Object.cs" />
+    <Compile Include="DXGIAdapter.cs" />
+    <Compile Include="DXGIAdapter1.cs" />
+    <Compile Include="DXGIDevice.cs" />
+    <Compile Include="DXGIDevice1.cs" />
+    <Compile Include="DXGIFactory1.cs" />
+    <Compile Include="DXGIDeviceSubObject.cs" />
+    <Compile Include="DXGISurface.cs" />
+    <Compile Include="DXGIKeyedMutex.cs" />
+    <Compile Include="DXGIObject.cs" />
     <Compile Include="Enums\AdapterFlag.cs" />
     <Compile Include="Enums\ColorSpaceType.cs" />
     <Compile Include="Enums\CpuAccess.cs" />
@@ -66,25 +68,25 @@
     <Compile Include="Enums\SwapEffect.cs" />
     <Compile Include="Enums\Usage.cs" />
     <Compile Include="Enums\WindowAssociationFlags.cs" />
-    <Compile Include="Factory.cs" />
-    <Compile Include="Interfaces\IAdapter.cs" />
-    <Compile Include="Interfaces\IAdapter1.cs" />
-    <Compile Include="Interfaces\IDevice.cs" />
-    <Compile Include="Interfaces\IDevice1.cs" />
-    <Compile Include="Interfaces\IDeviceSubObject.cs" />
-    <Compile Include="Interfaces\IFactory.cs" />
-    <Compile Include="Interfaces\IFactory1.cs" />
-    <Compile Include="Interfaces\IKeyedMutex.cs" />
-    <Compile Include="Interfaces\IObject.cs" />
-    <Compile Include="Interfaces\IOutput.cs" />
-    <Compile Include="Interfaces\IResource.cs" />
-    <Compile Include="Interfaces\ISurface.cs" />
-    <Compile Include="Interfaces\ISurface1.cs" />
-    <Compile Include="Interfaces\ISwapChain.cs" />
+    <Compile Include="DXGIFactory.cs" />
+    <Compile Include="Interfaces\IDXGIAdapter.cs" />
+    <Compile Include="Interfaces\IDXGIAdapter1.cs" />
+    <Compile Include="Interfaces\IDXGIDevice.cs" />
+    <Compile Include="Interfaces\IDXGIDevice1.cs" />
+    <Compile Include="Interfaces\IDXGIDeviceSubObject.cs" />
+    <Compile Include="Interfaces\IDXGIFactory.cs" />
+    <Compile Include="Interfaces\IDXGIFactory1.cs" />
+    <Compile Include="Interfaces\IDXGIKeyedMutex.cs" />
+    <Compile Include="Interfaces\IDXGIObject.cs" />
+    <Compile Include="Interfaces\IDXGIOutput.cs" />
+    <Compile Include="Interfaces\IDXGIResource.cs" />
+    <Compile Include="Interfaces\IDXGISurface.cs" />
+    <Compile Include="Interfaces\IDXGISurface1.cs" />
+    <Compile Include="Interfaces\IDXGISwapChain.cs" />
     <Compile Include="NativeMethods.cs" />
-    <Compile Include="Output.cs" />
+    <Compile Include="DXGIOutput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource.cs" />
+    <Compile Include="DXGIResource.cs" />
     <Compile Include="Structs\AdapterDescription.cs" />
     <Compile Include="Structs\AdapterDescription1.cs" />
     <Compile Include="Structs\DisplayColorSpace.cs" />
@@ -109,8 +111,8 @@
     <Compile Include="Structs\SharedResource.cs" />
     <Compile Include="Structs\SurfaceDescription.cs" />
     <Compile Include="Structs\SwapChainDescription.cs" />
-    <Compile Include="Surface1.cs" />
-    <Compile Include="SwapChain.cs" />
+    <Compile Include="DXGISurface1.cs" />
+    <Compile Include="DXGISwapChain.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DirectX.NET\DirectX.NET.csproj">

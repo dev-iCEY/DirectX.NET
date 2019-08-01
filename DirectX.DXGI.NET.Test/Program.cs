@@ -11,12 +11,12 @@ namespace DirectX.DXGI.NET.Test
     {
         public static void Main()
         {
-            IFactory factory = new Factory();
+            IDXGIFactory factory = new DXGIFactory();
             using (factory)
             {
                 uint adapterId = 0;
 
-                while (factory.EnumAdapters(adapterId, out IAdapter adapter) == 0)
+                while (factory.EnumAdapters(adapterId, out IDXGIAdapter adapter) == 0)
                 {
                     using (adapter)
                     {
@@ -26,7 +26,7 @@ namespace DirectX.DXGI.NET.Test
 
                             uint outputId = 0;
                             bool hasAnyOutputs = false;
-                            while (adapter.EnumOutputs(outputId, out IOutput output) == 0)
+                            while (adapter.EnumOutputs(outputId, out IDXGIOutput output) == 0)
                             {
                                 using (output)
                                 {

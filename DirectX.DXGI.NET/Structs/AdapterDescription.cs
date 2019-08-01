@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 namespace DirectX.DXGI.NET
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-    public struct AdapterDescription
+    public ref struct AdapterDescription
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
         public readonly string Description;

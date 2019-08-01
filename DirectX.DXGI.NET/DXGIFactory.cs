@@ -10,25 +10,25 @@ using DirectX.NET.Interfaces;
 
 namespace DirectX.DXGI.NET
 {
-    public class Factory : Object, IFactory
+    public class DXGIFactory : DXGIObject, IDXGIFactory
     {
-        protected new readonly int MethodsCount = typeof(IFactory).GetMethods().Length;
+        protected new readonly int MethodsCount = typeof(IDXGIFactory).GetMethods().Length;
 
-        public Factory() : this(NativeMethods.CreateFactory())
+        public DXGIFactory() : this(NativeMethods.CreateFactory())
         {
         }
 
-        public Factory(IntPtr objectPtr) : base(objectPtr)
+        public DXGIFactory(IntPtr objectPtr) : base(objectPtr)
         {
             AddMethodsToVTableList(base.MethodsCount, MethodsCount);
             MethodsCount = base.MethodsCount + MethodsCount;
         }
 
-        public int EnumAdapters(uint adapterIndex, out IAdapter adapter)
+        public int EnumAdapters(uint adapterIndex, out IDXGIAdapter adapter)
         {
             int result = GetMethodDelegate<EnumAdaptersDelegate>().Invoke(this, adapterIndex, out IntPtr adapterPtr);
 
-            adapter = result == 0 ? new Adapter(adapterPtr) : null;
+            adapter = result == 0 ? new DXGIAdapter(adapterPtr) : null;
 
             return result;
         }
@@ -43,19 +43,19 @@ namespace DirectX.DXGI.NET
             return GetMethodDelegate<GetWindowAssociationDelegate>().Invoke(this, out windowHandle);
         }
 
-        public int CreateSwapChain(IUnknown device, in SwapChainDescription desc, out ISwapChain swapChain)
+        public int CreateSwapChain(IUnknown device, in SwapChainDescription desc, out IDXGISwapChain swapChain)
         {
             int result = GetMethodDelegate<CreateSwapChainDelegate>()
                 .Invoke(this, (Unknown) device, out IntPtr swapChainPtr);
-            swapChain = result == 0 ? new SwapChain(swapChainPtr) : null;
+            swapChain = result == 0 ? new DXGISwapChain(swapChainPtr) : null;
             return result;
         }
 
-        public int CreateSoftwareAdapter(IntPtr moduleHandle, out IAdapter softwareAdapter)
+        public int CreateSoftwareAdapter(IntPtr moduleHandle, out IDXGIAdapter softwareAdapter)
         {
             int result = GetMethodDelegate<CreateSoftwareAdapterDelegate>()
                 .Invoke(this, moduleHandle, out IntPtr softwareAdapterPtr);
-            softwareAdapter = result == 0 ? new Adapter(softwareAdapterPtr) : null;
+            softwareAdapter = result == 0 ? new DXGIAdapter(softwareAdapterPtr) : null;
             return result;
         }
 

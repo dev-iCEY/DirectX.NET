@@ -9,24 +9,24 @@ using DirectX.NET;
 
 namespace DirectX.DXGI.NET
 {
-    public class Factory1 : Factory, IFactory1
+    public class DXGIFactory1 : DXGIFactory, IDXGIFactory1
     {
-        protected new readonly int MethodsCount = typeof(IFactory1).GetMethods().Length;
+        protected new readonly int MethodsCount = typeof(IDXGIFactory1).GetMethods().Length;
 
-        public Factory1() : this(NativeMethods.CreateFactory1())
+        public DXGIFactory1() : this(NativeMethods.CreateFactory1())
         {
         }
 
-        public Factory1(IntPtr objectPtr) : base(objectPtr)
+        public DXGIFactory1(IntPtr objectPtr) : base(objectPtr)
         {
             AddMethodsToVTableList(base.MethodsCount, MethodsCount);
             MethodsCount = base.MethodsCount + MethodsCount;
         }
 
-        public int EnumAdapters1(uint adapterId, out IAdapter1 adapter1)
+        public int EnumAdapters1(uint adapterId, out IDXGIAdapter1 adapter1)
         {
             int result = GetMethodDelegate<EnumAdapters1Delegate>().Invoke(this, adapterId, out IntPtr adapterPtr);
-            adapter1 = result == 0 ? new Adapter1(adapterPtr) : null;
+            adapter1 = result == 0 ? new DXGIAdapter1(adapterPtr) : null;
             return result;
         }
 

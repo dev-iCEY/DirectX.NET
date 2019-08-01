@@ -8,11 +8,11 @@ using DirectX.NET;
 
 namespace DirectX.DXGI.NET
 {
-    public class Adapter1 : Adapter, IAdapter1
+    public class DXGIAdapter1 : DXGIAdapter, IDXGIAdapter1
     {
-        protected new readonly int MethodsCount = typeof(IAdapter1).GetMethods().Length;
+        protected new readonly int MethodsCount = typeof(IDXGIAdapter1).GetMethods().Length;
 
-        public Adapter1(IntPtr objectPtr) : base(objectPtr)
+        public DXGIAdapter1(IntPtr objectPtr) : base(objectPtr)
         {
             AddMethodsToVTableList(base.MethodsCount, MethodsCount);
             MethodsCount = base.MethodsCount + MethodsCount;

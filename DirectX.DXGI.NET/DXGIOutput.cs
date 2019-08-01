@@ -10,12 +10,12 @@ using DirectX.NET.Interfaces;
 
 namespace DirectX.DXGI.NET
 {
-    public class Output : Object, IOutput
+    public class DXGIOutput : DXGIObject, IDXGIOutput
     {
-        protected new const uint LastMethodId = Object.LastMethodId + 12u;
-        protected new readonly int MethodsCount = typeof(IOutput).GetMethods().Length;
+        protected new const uint LastMethodId = DXGIObject.LastMethodId + 12u;
+        protected new readonly int MethodsCount = typeof(IDXGIOutput).GetMethods().Length;
 
-        public Output(IntPtr objectPtr) : base(objectPtr)
+        public DXGIOutput(IntPtr objectPtr) : base(objectPtr)
         {
             AddMethodsToVTableList(base.MethodsCount, MethodsCount);
             MethodsCount = base.MethodsCount + MethodsCount;
@@ -69,14 +69,14 @@ namespace DirectX.DXGI.NET
             return GetMethodDelegate<GetGammaControlDelegate>().Invoke(this, out gammaControl);
         }
 
-        public int SetDisplaySurface(ISurface surface)
+        public int SetDisplaySurface(IDXGISurface surface)
         {
-            return GetMethodDelegate<SetDisplaySurfaceDelegate>().Invoke(this, (Surface) surface);
+            return GetMethodDelegate<SetDisplaySurfaceDelegate>().Invoke(this, (DXGISurface) surface);
         }
 
-        public int GetDisplaySurfaceData(ISurface surface)
+        public int GetDisplaySurfaceData(IDXGISurface surface)
         {
-            return GetMethodDelegate<GetDisplaySurfaceDataDelegate>().Invoke(this, (Surface) surface);
+            return GetMethodDelegate<GetDisplaySurfaceDataDelegate>().Invoke(this, (DXGISurface) surface);
         }
 
         public int GetFrameStatistics(out FrameStatistics frameStatistics)
@@ -84,47 +84,47 @@ namespace DirectX.DXGI.NET
             return GetMethodDelegate<GetFrameStatisticsDelegate>().Invoke(this, out frameStatistics);
         }
 
-        [ComMethodId(Object.LastMethodId + 1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetDescDelegate(IntPtr thisPtr, out OutputDescription description);
 
-        [ComMethodId(Object.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetDisplayModeListDelegate(IntPtr thisPtr, Format format, uint flags, ref uint numModes,
             [In, Out, MarshalAs(UnmanagedType.LPArray)]
             ModeDescription[] modesDesc = null);
 
-        [ComMethodId(Object.LastMethodId + 3u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 3u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int FindClosestMatchingModeDelegate(IntPtr thisPtr, in ModeDescription modeMatch,
             out ModeDescription closestMatch, IntPtr concernedDevicePtr);
 
-        [ComMethodId(Object.LastMethodId + 4u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 4u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int WaitForVBlankDelegate(IntPtr thisPtr);
 
-        [ComMethodId(Object.LastMethodId + 5u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 5u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int TakeOwnershipDelegate(IntPtr thisPtr, IntPtr device,
             [MarshalAs(UnmanagedType.Bool)] bool isExclusive);
 
-        [ComMethodId(Object.LastMethodId + 6u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 6u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int ReleaseOwnershipDelegate(IntPtr thisPtr);
 
-        [ComMethodId(Object.LastMethodId + 7u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 7u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetGammaControlCapabilitiesDelegate(IntPtr thisPtr,
             out GammaControlCapabilities gammaControlCapabilities);
 
-        [ComMethodId(Object.LastMethodId + 8u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 8u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int SetGammaControlDelegate(IntPtr thisPtr,
             in GammaControl gammaControlCapabilities);
 
-        [ComMethodId(Object.LastMethodId + 9u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 9u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetGammaControlDelegate(IntPtr thisPtr,
             out GammaControl gammaControlCapabilities);
 
-        [ComMethodId(Object.LastMethodId + 10u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 10u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int SetDisplaySurfaceDelegate(IntPtr thisPtr, IntPtr surfacePtr);
 
-        [ComMethodId(Object.LastMethodId + 11u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 11u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetDisplaySurfaceDataDelegate(IntPtr thisPtr, IntPtr surfacePtr);
 
-        [ComMethodId(Object.LastMethodId + 12u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(DXGIObject.LastMethodId + 12u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetFrameStatisticsDelegate(IntPtr thisPtr, out FrameStatistics frameStatistics);
     }
 }

@@ -9,20 +9,20 @@ using DirectX.NET;
 
 namespace DirectX.DXGI.NET
 {
-    public class Adapter : Object, IAdapter
+    public class DXGIAdapter : DXGIObject, IDXGIAdapter
     {
-        protected new readonly int MethodsCount = typeof(IAdapter).GetMethods().Length;
+        protected new readonly int MethodsCount = typeof(IDXGIAdapter).GetMethods().Length;
 
-        public Adapter(IntPtr objectPtr) : base(objectPtr)
+        public DXGIAdapter(IntPtr objectPtr) : base(objectPtr)
         {
             AddMethodsToVTableList(base.MethodsCount, MethodsCount);
             MethodsCount = base.MethodsCount + MethodsCount;
         }
 
-        public int EnumOutputs(uint outputIndex, out IOutput output)
+        public int EnumOutputs(uint outputIndex, out IDXGIOutput output)
         {
             int result = GetMethodDelegate<EnumOutputsDelegate>().Invoke(this, outputIndex, out IntPtr outputPtr);
-            output = result == 0 ? new Output(outputPtr) : null;
+            output = result == 0 ? new DXGIOutput(outputPtr) : null;
             return result;
         }
 
