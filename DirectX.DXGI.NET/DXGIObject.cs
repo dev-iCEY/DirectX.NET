@@ -50,7 +50,8 @@ namespace DirectX.DXGI.NET
         /// <remarks>This API makes a copy of the specified data and stores it with the object.</remarks>
         public int SetPrivateData(in Guid name, uint dataSize, byte[] data)
         {
-            return GetMethodDelegate<SetPrivateDataDelegate>().Invoke(this, in name, dataSize, data);
+            return GetMethodDelegate<SetPrivateDataDelegate>()
+                .Invoke(this, in name, dataSize, data);
         }
 
         /// <summary>
@@ -82,7 +83,8 @@ namespace DirectX.DXGI.NET
         /// <returns>Returns one of the following DXGI_ERROR.</returns>
         public int GetPrivateData(in Guid name, ref uint dataSize, [In, Out] byte[] data = null)
         {
-            return GetMethodDelegate<GetPrivateDataDelegate>().Invoke(this, in name, ref dataSize, data);
+            return GetMethodDelegate<GetPrivateDataDelegate>()
+                .Invoke(this, in name, ref dataSize, data);
         }
 
         /// <summary>
@@ -92,7 +94,8 @@ namespace DirectX.DXGI.NET
         /// <param name="parent">The address of a pointer to the parent object.</param>
         public int GetParent(in Guid riid, out IntPtr parent)
         {
-            return GetMethodDelegate<GetParentDelegate>().Invoke(this, in riid, out parent);
+            return GetMethodDelegate<GetParentDelegate>()
+                .Invoke(this, in riid, out parent);
         }
 
         [ComMethodId(Unknown.LastMethodId + 1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]

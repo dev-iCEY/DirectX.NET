@@ -43,7 +43,7 @@ namespace DirectX.DXGI.NET
             return GetMethodDelegate<GetWindowAssociationDelegate>().Invoke(this, out windowHandle);
         }
 
-        public int CreateSwapChain(IUnknown device, in SwapChainDescription desc, out IDXGISwapChain swapChain)
+        public int CreateSwapChain(IUnknown device, in DXGISwapChainDescription desc, out IDXGISwapChain swapChain)
         {
             int result = GetMethodDelegate<CreateSwapChainDelegate>()
                 .Invoke(this, (Unknown) device, out IntPtr swapChainPtr);

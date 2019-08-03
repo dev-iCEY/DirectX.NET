@@ -26,7 +26,7 @@ namespace DirectX.DXGI.NET
             return result;
         }
 
-        public int GetDesc(out AdapterDescription desc)
+        public int GetDesc(out DXGIAdapterDescription desc)
         {
             return GetMethodDelegate<GetDescDelegate>().Invoke(this, out desc);
         }
@@ -40,7 +40,7 @@ namespace DirectX.DXGI.NET
         private delegate int EnumOutputsDelegate(IntPtr thisPtr, uint adapterIndex, out IntPtr outputPtr);
 
         [ComMethodId(8u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate int GetDescDelegate(IntPtr thisPtr, out AdapterDescription description);
+        private delegate int GetDescDelegate(IntPtr thisPtr, out DXGIAdapterDescription description);
 
         [ComMethodId(9u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int CheckInterfaceSupportDelegate(IntPtr thisPtr, in Guid guid, out LargeInteger pUmdVersion);

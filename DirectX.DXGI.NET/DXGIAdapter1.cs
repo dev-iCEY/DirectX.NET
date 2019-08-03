@@ -18,12 +18,12 @@ namespace DirectX.DXGI.NET
             MethodsCount = base.MethodsCount + MethodsCount;
         }
 
-        public int GetDesc1(out AdapterDescription1 adapterDesc1)
+        public int GetDesc1(out DXGIAdapterDescription1 adapterDesc1)
         {
             return GetMethodDelegate<GetDesc1Delegate>().Invoke(this, out adapterDesc1);
         }
 
         [ComMethodId(10u)]
-        private delegate int GetDesc1Delegate(IntPtr thisPtr, out AdapterDescription1 adapterDescription1);
+        private delegate int GetDesc1Delegate(IntPtr thisPtr, out DXGIAdapterDescription1 adapterDescription1);
     }
 }

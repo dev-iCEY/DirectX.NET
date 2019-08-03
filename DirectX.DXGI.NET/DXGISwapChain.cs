@@ -45,18 +45,18 @@ namespace DirectX.DXGI.NET
             return result;
         }
 
-        public int GetDesc(out SwapChainDescription desc)
+        public int GetDesc(out DXGISwapChainDescription desc)
         {
             return GetMethodDelegate<GetDescDelegate>().Invoke(this, out desc);
         }
 
-        public int ResizeBuffers(uint bufferCount, uint width, uint height, Format newFormat, SwapChainFlag flags)
+        public int ResizeBuffers(uint bufferCount, uint width, uint height, DXGIFormat newFormat, DXGISwapChainFlag flags)
         {
             return GetMethodDelegate<ResizeBuffersDelegate>()
                 .Invoke(this, bufferCount, width, height, newFormat, flags);
         }
 
-        public int ResizeTarget(in ModeDescription newTargetParameters)
+        public int ResizeTarget(in DXGIModeDescription newTargetParameters)
         {
             return GetMethodDelegate<ResizeTargetDelegate>().Invoke(this, in newTargetParameters);
         }
@@ -68,7 +68,7 @@ namespace DirectX.DXGI.NET
             return result;
         }
 
-        public int GetFrameStatistics(out FrameStatistics frameStatistics)
+        public int GetFrameStatistics(out DXGIFrameStatistics frameStatistics)
         {
             return GetMethodDelegate<GetFrameStatisticsDelegate>().Invoke(this, out frameStatistics);
         }
@@ -92,20 +92,20 @@ namespace DirectX.DXGI.NET
         private delegate int GetFullscreenStateDelegate(IntPtr thisPtr, out bool fullscreenState, out IntPtr outputPtr);
 
         [ComMethodId(DXGIDeviceSubObject.LastMethodId + 5u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate int GetDescDelegate(IntPtr thisPtr, out SwapChainDescription desc);
+        private delegate int GetDescDelegate(IntPtr thisPtr, out DXGISwapChainDescription desc);
 
         [ComMethodId(DXGIDeviceSubObject.LastMethodId + 6u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int ResizeBuffersDelegate(IntPtr thisPtr, uint bufferCount, uint width, uint height,
-            Format newFormat, SwapChainFlag flags);
+            DXGIFormat newFormat, DXGISwapChainFlag flags);
 
         [ComMethodId(DXGIDeviceSubObject.LastMethodId + 7u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate int ResizeTargetDelegate(IntPtr thisPtr, in ModeDescription newTargetParameters);
+        private delegate int ResizeTargetDelegate(IntPtr thisPtr, in DXGIModeDescription newTargetParameters);
 
         [ComMethodId(DXGIDeviceSubObject.LastMethodId + 8u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetContainingOutputDelegate(IntPtr thisPtr, out IntPtr outputPtr);
 
         [ComMethodId(DXGIDeviceSubObject.LastMethodId + 9u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate int GetFrameStatisticsDelegate(IntPtr thisPtr, out FrameStatistics frameStatistics);
+        private delegate int GetFrameStatisticsDelegate(IntPtr thisPtr, out DXGIFrameStatistics frameStatistics);
 
         [ComMethodId(DXGIDeviceSubObject.LastMethodId + 10u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetLastPresentCountDelegate(IntPtr thisPtr, out uint countPresent);

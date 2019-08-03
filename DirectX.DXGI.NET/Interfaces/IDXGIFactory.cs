@@ -16,7 +16,7 @@ namespace DirectX.DXGI.NET.Interfaces
         int EnumAdapters(uint adapterIndex, out IDXGIAdapter adapter);
         int MakeWindowAssociation(IntPtr windowHandle, WindowAssociationFlags flags);
         int GetWindowAssociation(out IntPtr windowHandle);
-        int CreateSwapChain(IUnknown device, in SwapChainDescription desc, out IDXGISwapChain swapChain);
+        int CreateSwapChain(IUnknown device, in DXGISwapChainDescription desc, out IDXGISwapChain swapChain);
         int CreateSoftwareAdapter(IntPtr moduleHandle, out IDXGIAdapter softwareAdapter);
     }
 }

@@ -20,12 +20,12 @@ namespace DirectX.DXGI.NET
             MethodsCount = base.MethodsCount + MethodsCount;
         }
 
-        public int GetDesc(out SurfaceDescription surfaceDesc)
+        public int GetDesc(out DXGISurfaceDescription surfaceDesc)
         {
             return GetMethodDelegate<GetDescDelegate>().Invoke(this, out surfaceDesc);
         }
 
-        public int Map(out MappedRect mappedRect, Map flags)
+        public int Map(out DXGIMappedRect mappedRect, Map flags)
         {
             return GetMethodDelegate<MapDelegate>().Invoke(this, out mappedRect, flags);
         }
@@ -36,10 +36,10 @@ namespace DirectX.DXGI.NET
         }
 
         [ComMethodId(DXGIDeviceSubObject.LastMethodId + 1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate int GetDescDelegate(IntPtr thisPtr, out SurfaceDescription surfaceDescription);
+        private delegate int GetDescDelegate(IntPtr thisPtr, out DXGISurfaceDescription surfaceDescription);
 
         [ComMethodId(DXGIDeviceSubObject.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate int MapDelegate(IntPtr thisPtr, out MappedRect rect, Map flags);
+        private delegate int MapDelegate(IntPtr thisPtr, out DXGIMappedRect rect, Map flags);
 
         [ComMethodId(DXGIDeviceSubObject.LastMethodId + 3u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int UnMapDelegate(IntPtr thisPtr);

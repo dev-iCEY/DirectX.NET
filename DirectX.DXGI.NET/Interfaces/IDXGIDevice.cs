@@ -25,11 +25,11 @@ namespace DirectX.DXGI.NET.Interfaces
         /// <summary>
         ///     This method is used internally and should not be called directly by your application code.
         /// </summary>
-        /// <param name="surfaceDesc">A <seealso cref="SurfaceDescription" /> structure that describes the surface.</param>
+        /// <param name="surfaceDesc">A <seealso cref="DXGISurfaceDescription" /> structure that describes the surface.</param>
         /// <param name="numSurfaces">The number of surfaces to create.</param>
-        /// <param name="usage">A <seealso cref="Usage" /> flag that specifies how the surface is expected to be used.</param>
+        /// <param name="usage">A <seealso cref="DXGIUsage" /> flag that specifies how the surface is expected to be used.</param>
         /// <param name="sharedResource">
-        ///     An optional pointer to a <seealso cref="SharedResource" /> structure that represents
+        ///     An optional pointer to a <seealso cref="DXGISharedResource" /> structure that represents
         ///     shared resource information for opening views of such resources.
         /// </param>
         /// <param name="surfaces">
@@ -37,15 +37,15 @@ namespace DirectX.DXGI.NET.Interfaces
         ///     surface.
         /// </param>
         /// <returns></returns>
-        int CreateSurface(in SurfaceDescription surfaceDesc, uint numSurfaces, Usage usage,
-            in SharedResource sharedResource, out IDXGISurface[] surfaces);
+        int CreateSurface(in DXGISurfaceDescription surfaceDesc, uint numSurfaces, DXGIUsage usage,
+            in DXGISharedResource sharedResource, out IDXGISurface[] surfaces);
 
         /// <summary>
         ///     Gets the residency status of an array of resources.
         /// </summary>
         /// <param name="resources">An array of <seealso cref="IDXGIResource" /> interfaces.</param>
         /// <param name="residencyStatus">
-        ///     An array of <seealso cref="Residency" /> flags. Each element describes the residency
+        ///     An array of <seealso cref="DXGIResidency" /> flags. Each element describes the residency
         ///     status for corresponding element in the ppResources argument array.
         /// </param>
         /// <param name="numResources">
@@ -56,7 +56,7 @@ namespace DirectX.DXGI.NET.Interfaces
         ///     Returns S_OK if successfull; otherwise, returns D3DERR_DEVICEREMOVED (see D3DERR for more information),
         ///     E_INVALIDARG, or E_POINTER (see WinError.h for more information).
         /// </returns>
-        int QueryResourceResidency(IDXGIResource[] resources, out Residency[] residencyStatus, uint numResources);
+        int QueryResourceResidency(IDXGIResource[] resources, out DXGIResidency[] residencyStatus, uint numResources);
 
         /// <summary>
         ///     Sets the GPU thread priority

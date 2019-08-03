@@ -20,7 +20,7 @@ namespace DirectX.DXGI.NET.Test
                 {
                     using (adapter)
                     {
-                        if (adapter.GetDesc(out AdapterDescription adapterDescription) == 0)
+                        if (adapter.GetDesc(out DXGIAdapterDescription adapterDescription) == 0)
                         {
                             Console.Write("Adapter: {0}", adapterDescription.Description);
 
@@ -35,20 +35,20 @@ namespace DirectX.DXGI.NET.Test
                                         hasAnyOutputs = true;
                                     }
 
-                                    if (output.GetDesc(out OutputDescription outputDescription) == 0)
+                                    if (output.GetDesc(out DXGIOutputDescription outputDescription) == 0)
                                     {
                                         Console.Write(", have output #{1}: {0}", outputDescription.DeviceName,
                                             outputId);
                                         uint numModes = 0;
-                                        if (output.GetDisplayModeList(Format.R8G8B8A8UNorm, 0, ref numModes) == 0)
+                                        if (output.GetDisplayModeList(DXGIFormat.R8G8B8A8UNorm, 0, ref numModes) == 0)
                                         {
                                             Console.Write(", and support Format R8G8B8A8UNorm modes count: {0}\n",
                                                 numModes);
-                                            ModeDescription[] modeDescriptions = new ModeDescription[numModes];
-                                            if (output.GetDisplayModeList(Format.R8G8B8A8UNorm, 0, ref numModes,
+                                            DXGIModeDescription[] modeDescriptions = new DXGIModeDescription[numModes];
+                                            if (output.GetDisplayModeList(DXGIFormat.R8G8B8A8UNorm, 0, ref numModes,
                                                     modeDescriptions) == 0)
                                             {
-                                                foreach (ModeDescription description in modeDescriptions)
+                                                foreach (DXGIModeDescription description in modeDescriptions)
                                                 {
                                                     Console.WriteLine
                                                     (

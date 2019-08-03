@@ -15,11 +15,11 @@ namespace DirectX.DXGI.NET.Interfaces
         int GetBuffer(uint buffer, in Guid riid, out IUnknown surface);
         int SetFullscreenState(bool state, [Optional] IDXGIOutput target);
         int GetFullscreenState(out bool state, out IDXGIOutput target);
-        int GetDesc(out SwapChainDescription desc);
-        int ResizeBuffers(uint bufferCount, uint width, uint height, Format newFormat, SwapChainFlag flags);
-        int ResizeTarget(in ModeDescription newTargetParameters);
+        int GetDesc(out DXGISwapChainDescription desc);
+        int ResizeBuffers(uint bufferCount, uint width, uint height, DXGIFormat newFormat, DXGISwapChainFlag flags);
+        int ResizeTarget(in DXGIModeDescription newTargetParameters);
         int GetContainingOutput(out IDXGIOutput output);
-        int GetFrameStatistics(out FrameStatistics frameStatistics);
+        int GetFrameStatistics(out DXGIFrameStatistics frameStatistics);
         int GetLastPresentCount(out uint lastPresentCount);
     }
 }

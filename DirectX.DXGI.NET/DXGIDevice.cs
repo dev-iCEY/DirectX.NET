@@ -51,11 +51,11 @@ namespace DirectX.DXGI.NET
         /// <summary>
         ///     This method is used internally and should not be called directly by your application code.
         /// </summary>
-        /// <param name="surfaceDesc">A <seealso cref="SurfaceDescription" /> structure that describes the surface.</param>
+        /// <param name="surfaceDesc">A <seealso cref="DXGISurfaceDescription" /> structure that describes the surface.</param>
         /// <param name="numSurfaces">The number of surfaces to create.</param>
-        /// <param name="usage">A <seealso cref="Usage" /> flag that specifies how the surface is expected to be used.</param>
+        /// <param name="usage">A <seealso cref="DXGIUsage" /> flag that specifies how the surface is expected to be used.</param>
         /// <param name="sharedResource">
-        ///     An optional pointer to a <seealso cref="SharedResource" /> structure that represents
+        ///     An optional pointer to a <seealso cref="DXGISharedResource" /> structure that represents
         ///     shared resource information for opening views of such resources.
         /// </param>
         /// <param name="surfaces">
@@ -63,8 +63,8 @@ namespace DirectX.DXGI.NET
         ///     surface.
         /// </param>
         /// <returns></returns>
-        public int CreateSurface(in SurfaceDescription surfaceDesc, uint numSurfaces, Usage usage,
-            in SharedResource sharedResource,
+        public int CreateSurface(in DXGISurfaceDescription surfaceDesc, uint numSurfaces, DXGIUsage usage,
+            in DXGISharedResource sharedResource,
             out IDXGISurface[] surfaces)
         {
             int result = GetMethodDelegate<CreateSurfaceDelegate>().Invoke(this, in surfaceDesc, numSurfaces, usage,
@@ -78,7 +78,7 @@ namespace DirectX.DXGI.NET
         /// </summary>
         /// <param name="resources">An array of <seealso cref="IDXGIResource" /> interfaces.</param>
         /// <param name="residencyStatus">
-        ///     An array of <seealso cref="Residency" /> flags. Each element describes the residency
+        ///     An array of <seealso cref="DXGIResidency" /> flags. Each element describes the residency
         ///     status for corresponding element in the ppResources argument array.
         /// </param>
         /// <param name="numResources">
@@ -89,7 +89,7 @@ namespace DirectX.DXGI.NET
         ///     Returns S_OK if successfull; otherwise, returns D3DERR_DEVICEREMOVED (see D3DERR for more information),
         ///     E_INVALIDARG, or E_POINTER (see WinError.h for more information).
         /// </returns>
-        public int QueryResourceResidency(IDXGIResource[] resources, out Residency[] residencyStatus, uint numResources)
+        public int QueryResourceResidency(IDXGIResource[] resources, out DXGIResidency[] residencyStatus, uint numResources)
         {
             IntPtr[] pointers = resources.Select<IDXGIResource, IntPtr>(resource => (DXGIResource) resource).ToArray();
             return GetMethodDelegate<QueryResourceResidencyDelegate>()
@@ -126,15 +126,15 @@ namespace DirectX.DXGI.NET
         private delegate int GetAdapterDelegate(IntPtr thisPtr, out IntPtr adapterPtr);
 
         [ComMethodId(DXGIObject.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate int CreateSurfaceDelegate(IntPtr thisPtr, in SurfaceDescription surfaceDesc, uint numSurfaces,
-            Usage usage, in SharedResource sharedResource, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
+        private delegate int CreateSurfaceDelegate(IntPtr thisPtr, in DXGISurfaceDescription surfaceDesc, uint numSurfaces,
+            DXGIUsage usage, in DXGISharedResource sharedResource, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
             out IntPtr[] surfacePtr);
 
         [ComMethodId(DXGIObject.LastMethodId + 3u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int QueryResourceResidencyDelegate(IntPtr thisPtr,
             [MarshalAs(UnmanagedType.LPArray)] in IntPtr[] ppResources,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
-            out Residency[] residencyStatus,
+            out DXGIResidency[] residencyStatus,
             uint numResources);
 
         [ComMethodId(DXGIObject.LastMethodId + 4u), UnmanagedFunctionPointer(CallingConvention.StdCall)]

@@ -1,26 +1,21 @@
 ﻿#region Usings
 
-using System;
-
 #endregion
 
 namespace DirectX.DXGI.NET
 {
-    [Flags]
-    public enum SwapChainFlag : uint
+    /// <summary>
+    /// </summary>
+    public static class DxgiSwapChainFlagExtensions
     {
-        NonPreRotated = 1,
-        AllowModeSwitch = 2,
-        GdiCompatible = 4,
-        RestrictedContent = 8,
-        RestrictSharedResourceDriver = 16,
-        DisplayOnly = 32,
-        FrameLatencyWaitableObject = 64,
-        ForegroundLayer = 128,
-        FullscreenVideo = 256,
-        YuvVideo = 512,
-        HwProtected = 1024,
-        AllowTearing = 2048,
-        RestrictedToAllHolographicDisplays = 4096
+        /// <summary>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="flag"></param>
+        /// <returns></returns>
+        public static bool HasFlagFast(this DXGISwapChainFlag value, DXGISwapChainFlag flag)
+        {
+            return (value & flag) != 0;
+        }
     }
 }

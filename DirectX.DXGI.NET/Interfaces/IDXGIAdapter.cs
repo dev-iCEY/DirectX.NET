@@ -22,14 +22,35 @@ namespace DirectX.DXGI.NET.Interfaces
     [Guid("2411e7e1-12ac-4ccf-bd14-9798e8534dc0"), SuppressMessage("ReSharper", "InconsistentNaming")]
     public interface IDXGIAdapter : IDXGIObject
     {
+        /// <summary>
+        ///     Enumerate adapter (video card) outputs.
+        /// </summary>
+        /// <param name="outputIndex">The index of the output.</param>
+        /// <param name="output">The object to an output (see <seealso cref="IDXGIOutput" />).</param>
+        /// <returns></returns>
         int EnumOutputs(uint outputIndex, out IDXGIOutput output);
 
         /// <summary>
         ///     Gets a DXGI 1.0 description of an adapter (or video card).
         /// </summary>
-        /// <param name="desc">A pointer to a <seealso cref="AdapterDescription" /> structure that describes the adapter.</param>
-        int GetDesc(out AdapterDescription desc);
+        /// <param name="desc">A pointer to a <seealso cref="DXGIAdapterDescription" /> structure that describes the adapter.</param>
+        int GetDesc(out DXGIAdapterDescription desc);
 
+        /// <summary>
+        /// Checks to see if a device interface for a graphics component is supported by the system. 
+        /// </summary>
+        /// <param name="interfaceName">The GUID of the interface of the device version for which support is being checked. For example,
+        /// <example>
+        /// <code>
+        /// int c = Math.Add(4, 5);
+        /// if (c > 10)
+        /// {
+        ///     Console.WriteLine(c);
+        /// }
+        /// </code>
+        /// </example></param>
+        /// <param name="pUmdVersion"></param>
+        /// <returns></returns>
         int CheckInterfaceSupport(in Guid interfaceName, out LargeInteger pUmdVersion);
     }
 }

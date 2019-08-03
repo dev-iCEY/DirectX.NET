@@ -11,7 +11,7 @@ namespace DirectX.DXGI.NET.Interfaces
     public interface IDXGIResource : IDXGIDeviceSubObject
     {
         int GetSharedHandle(out IntPtr sharedHandle);
-        int GetUsage(out Usage usage);
+        int GetUsage(out DXGIUsage usage);
         int SetEvictionPriority(uint evictionPriority);
         int GetEvictionPriority(out uint evictionPriority);
     }

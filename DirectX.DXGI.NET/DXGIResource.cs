@@ -25,7 +25,7 @@ namespace DirectX.DXGI.NET
             return GetMethodDelegate<GetSharedHandleDelegate>().Invoke(this, out sharedHandle);
         }
 
-        public int GetUsage(out Usage usage)
+        public int GetUsage(out DXGIUsage usage)
         {
             return GetMethodDelegate<GetUsageDelegate>().Invoke(this, out usage);
         }
@@ -44,7 +44,7 @@ namespace DirectX.DXGI.NET
         private delegate int GetSharedHandleDelegate(IntPtr thisPtr, out IntPtr sharedHandlePtr);
 
         [ComMethodId(DXGIDeviceSubObject.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate int GetUsageDelegate(IntPtr thisPtr, out Usage usage);
+        private delegate int GetUsageDelegate(IntPtr thisPtr, out DXGIUsage usage);
 
         [ComMethodId(DXGIDeviceSubObject.LastMethodId + 3u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int SetEvictionPriorityDelegate(IntPtr thisPtr, uint priority);
