@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttributeNotFoundException.cs" />
     <Compile Include="ComMethodIdAttribute.cs" />
     <Compile Include="Interfaces\IUnknown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

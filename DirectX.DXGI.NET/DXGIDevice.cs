@@ -18,16 +18,19 @@ namespace DirectX.DXGI.NET
     public class DXGIDevice : DXGIObject, IDXGIDevice
     {
         /// <summary>
+        ///     The last method identifier
         /// </summary>
         protected new const uint LastMethodId = DXGIObject.LastMethodId + 5u;
 
         /// <summary>
+        ///     The methods count
         /// </summary>
         protected new readonly int MethodsCount = typeof(IDXGIDevice).GetMethods().Length;
 
         /// <summary>
+        ///     Initializes a new instance of the <see cref="DXGIDevice" /> class.
         /// </summary>
-        /// <param name="objectPtr"></param>
+        /// <param name="objectPtr">The object PTR.</param>
         public DXGIDevice(IntPtr objectPtr) : base(objectPtr)
         {
             AddMethodsToVTableList(base.MethodsCount, MethodsCount);
@@ -89,7 +92,8 @@ namespace DirectX.DXGI.NET
         ///     Returns S_OK if successfull; otherwise, returns D3DERR_DEVICEREMOVED (see D3DERR for more information),
         ///     E_INVALIDARG, or E_POINTER (see WinError.h for more information).
         /// </returns>
-        public int QueryResourceResidency(IDXGIResource[] resources, out DXGIResidency[] residencyStatus, uint numResources)
+        public int QueryResourceResidency(IDXGIResource[] resources, out DXGIResidency[] residencyStatus,
+            uint numResources)
         {
             IntPtr[] pointers = resources.Select<IDXGIResource, IntPtr>(resource => (DXGIResource) resource).ToArray();
             return GetMethodDelegate<QueryResourceResidencyDelegate>()
@@ -126,8 +130,10 @@ namespace DirectX.DXGI.NET
         private delegate int GetAdapterDelegate(IntPtr thisPtr, out IntPtr adapterPtr);
 
         [ComMethodId(DXGIObject.LastMethodId + 2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate int CreateSurfaceDelegate(IntPtr thisPtr, in DXGISurfaceDescription surfaceDesc, uint numSurfaces,
-            DXGIUsage usage, in DXGISharedResource sharedResource, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
+        private delegate int CreateSurfaceDelegate(IntPtr thisPtr, in DXGISurfaceDescription surfaceDesc,
+            uint numSurfaces,
+            DXGIUsage usage, in DXGISharedResource sharedResource,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
             out IntPtr[] surfacePtr);
 
         [ComMethodId(DXGIObject.LastMethodId + 3u), UnmanagedFunctionPointer(CallingConvention.StdCall)]

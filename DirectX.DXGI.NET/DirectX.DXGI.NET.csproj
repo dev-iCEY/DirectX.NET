@@ -36,12 +36,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DXGIAdapter.cs" />
@@ -54,21 +48,22 @@
     <Compile Include="DXGIKeyedMutex.cs" />
     <Compile Include="DXGIObject.cs" />
     <Compile Include="Enums\DXGIAdapterFlag.cs" />
-    <Compile Include="Enums\ColorSpaceType.cs" />
-    <Compile Include="Enums\CpuAccess.cs" />
+    <Compile Include="Enums\DXGIColorSpaceType.cs" />
+    <Compile Include="Enums\DXGICpuAccess.cs" />
+    <Compile Include="Enums\DXGIEnumModes.cs" />
     <Compile Include="Enums\DXGIFormat.cs" />
     <Compile Include="Enums\DXGISwapChainFlag.cs" />
-    <Compile Include="Enums\Map.cs" />
+    <Compile Include="Enums\DXGIMap.cs" />
     <Compile Include="Enums\DXGIModeRotation.cs" />
     <Compile Include="Enums\DXGIModeScaling.cs" />
     <Compile Include="Enums\DXGIModeScanlineOrder.cs" />
-    <Compile Include="Enums\PresentFlags.cs" />
+    <Compile Include="Enums\DXGIPresentFlags.cs" />
     <Compile Include="Enums\DXGIResidency.cs" />
-    <Compile Include="Enums\ResourcePriority.cs" />
-    <Compile Include="Enums\SwapChainFlag.cs" />
+    <Compile Include="Enums\DXGIResourcePriority.cs" />
+    <Compile Include="Enums\DxgiSwapChainFlagExtensions.cs" />
     <Compile Include="Enums\DXGISwapEffect.cs" />
     <Compile Include="Enums\DXGIUsage.cs" />
-    <Compile Include="Enums\WindowAssociationFlags.cs" />
+    <Compile Include="Enums\DXGIWindowAssociationFlags.cs" />
     <Compile Include="DXGIFactory.cs" />
     <Compile Include="Interfaces\IDXGIAdapter.cs" />
     <Compile Include="Interfaces\IDXGIAdapter1.cs" />
@@ -90,13 +85,13 @@
     <Compile Include="DXGIResource.cs" />
     <Compile Include="Structs\DXGIAdapterDescription.cs" />
     <Compile Include="Structs\DXGIAdapterDescription1.cs" />
-    <Compile Include="Structs\DisplayColorSpace.cs" />
+    <Compile Include="Structs\DXGIDisplayColorSpace.cs" />
     <Compile Include="Structs\DXGIFrameStatistics.cs" />
     <Compile Include="Structs\DXGIGammaControl.cs" />
     <Compile Include="Structs\DXGIGammaControlCapabilities.cs" />
-    <Compile Include="Structs\JpegAcHuffmanTable.cs" />
-    <Compile Include="Structs\JpegDcHuffmanTable.cs" />
-    <Compile Include="Structs\JpegQuantizationTable.cs" />
+    <Compile Include="Structs\DXGIJpegAcHuffmanTable.cs" />
+    <Compile Include="Structs\DXGIJpegDcHuffmanTable.cs" />
+    <Compile Include="Structs\DXGIJpegQuantizationTable.cs" />
     <Compile Include="Structs\LargeInteger.cs" />
     <Compile Include="Structs\Luid.cs" />
     <Compile Include="Structs\DXGIMappedRect.cs" />

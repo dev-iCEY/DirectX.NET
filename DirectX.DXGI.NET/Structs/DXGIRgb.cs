@@ -10,7 +10,8 @@ namespace DirectX.DXGI.NET
     /// <summary>
     ///     Represents an RGB color.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential), SuppressMessage("ReSharper", "InconsistentNaming")]
+    [StructLayout(LayoutKind.Sequential),
+     SuppressMessage("ReSharper", "InconsistentNaming")]
     public struct DXGIRgb
     {
         /// <summary>

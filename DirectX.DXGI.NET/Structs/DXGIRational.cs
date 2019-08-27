@@ -10,7 +10,9 @@ namespace DirectX.DXGI.NET
     /// <summary>
     ///     Represents a rational number.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential), SuppressMessage("ReSharper", "InconsistentNaming")]
+    [StructLayout(LayoutKind.Sequential),
+     SuppressMessage("ReSharper", "InconsistentNaming"),
+     SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     public struct DXGIRational
     {
         /// <summary>

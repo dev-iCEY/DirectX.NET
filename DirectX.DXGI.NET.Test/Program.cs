@@ -37,22 +37,19 @@ namespace DirectX.DXGI.NET.Test
 
                                     if (output.GetDesc(out DXGIOutputDescription outputDescription) == 0)
                                     {
-                                        Console.Write(", have output #{1}: {0}", outputDescription.DeviceName,
-                                            outputId);
+                                        Console.Write(", have output #{1}: {0}", outputDescription.DeviceName, outputId);
                                         uint numModes = 0;
                                         if (output.GetDisplayModeList(DXGIFormat.R8G8B8A8UNorm, 0, ref numModes) == 0)
                                         {
-                                            Console.Write(", and support Format R8G8B8A8UNorm modes count: {0}\n",
-                                                numModes);
+                                            Console.Write(", and support Format R8G8B8A8UNorm modes count: {0}\n", numModes);
                                             DXGIModeDescription[] modeDescriptions = new DXGIModeDescription[numModes];
-                                            if (output.GetDisplayModeList(DXGIFormat.R8G8B8A8UNorm, 0, ref numModes,
-                                                    modeDescriptions) == 0)
+                                            if (output.GetDisplayModeList(DXGIFormat.R8G8B8A8UNorm, 0, ref numModes, modeDescriptions) == 0)
                                             {
                                                 foreach (DXGIModeDescription description in modeDescriptions)
                                                 {
                                                     Console.WriteLine
                                                     (
-                                                        "\t{0}x{1} @ {2} hz",
+                                                        "    {0}x{1} @ {2} hz",
                                                         description.Width,
                                                         description.Height,
                                                         description.RefreshRate.Numerator /

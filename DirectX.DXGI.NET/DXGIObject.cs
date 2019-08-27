@@ -20,16 +20,19 @@ namespace DirectX.DXGI.NET
     public class DXGIObject : Unknown, IDXGIObject
     {
         /// <summary>
+        ///     The last method identifier
         /// </summary>
         protected new const uint LastMethodId = Unknown.LastMethodId + 4u;
 
         /// <summary>
+        ///     The methods count
         /// </summary>
         protected new readonly int MethodsCount = typeof(IDXGIObject).GetMethods().Length;
 
         /// <summary>
+        ///     Initializes a new instance of the <see cref="DXGIObject" /> class.
         /// </summary>
-        /// <param name="objectPtr"></param>
+        /// <param name="objectPtr">The object PTR.</param>
         public DXGIObject(IntPtr objectPtr) : base(objectPtr)
         {
             AddMethodsToVTableList(base.MethodsCount, MethodsCount);

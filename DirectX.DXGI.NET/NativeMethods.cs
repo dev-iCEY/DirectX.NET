@@ -8,8 +8,16 @@ using DirectX.DXGI.NET.Interfaces;
 
 namespace DirectX.DXGI.NET
 {
+    /// <summary>
+    /// </summary>
     public static class NativeMethods
     {
+        /// <summary>
+        ///     Creates the dxgi factory.
+        /// </summary>
+        /// <param name="riid">The riid.</param>
+        /// <param name="factory">The factory.</param>
+        /// <returns></returns>
         [DllImport("dxgi.dll", PreserveSig = true)]
         public static extern int CreateDXGIFactory(in Guid riid, out IntPtr factory);
 
@@ -37,6 +45,12 @@ namespace DirectX.DXGI.NET
             return factoryPtr;
         }
 
+        /// <summary>
+        ///     Creates the dxgi factory1.
+        /// </summary>
+        /// <param name="riid">The riid.</param>
+        /// <param name="factory1">The factory1.</param>
+        /// <returns></returns>
         [DllImport("dxgi.dll", PreserveSig = true)]
         public static extern int CreateDXGIFactory1(in Guid riid, out IntPtr factory1);
     }
