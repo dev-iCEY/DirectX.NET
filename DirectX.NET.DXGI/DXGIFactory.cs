@@ -30,7 +30,7 @@ namespace DirectX.NET.DXGI
         ///     Initializes a new instance of the <see cref="DXGIFactory" /> class.
         /// </summary>
         public DXGIFactory() :
-            this(NativeMethods.CreateFactory())
+            this(DXGINativeMethods.CreateFactory())
         {
         }
 
@@ -40,8 +40,7 @@ namespace DirectX.NET.DXGI
         /// <param name="objectPtr">Unmanaged native pointer to <seealso cref="IDXGIFactory" /> interface</param>
         public DXGIFactory(IntPtr objectPtr) : base(objectPtr)
         {
-            AddMethodsToVTableList(base.MethodsCount, MethodsCount);
-            MethodsCount = base.MethodsCount + MethodsCount;
+            AddMethodsToVTableList(base.MethodsCount, ref MethodsCount);
         }
 
         /// <summary>Enumerates the adapters (video cards).</summary>

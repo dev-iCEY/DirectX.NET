@@ -1,20 +1,39 @@
 ﻿#region Usings
 
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
+using System;
+using DirectX.NET.DXGI.Interfaces;
 
 #endregion
 
-namespace DirectX.NET.DXGI.Interfaces
+namespace DirectX.NET.DXGI
 {
     /// <summary>
     ///     An <seealso cref="IDXGIResource1" /> interface extends the <seealso cref="IDXGIResource" /> interface by adding
     ///     support for creating a subresource surface object and for creating a handle to a shared resource.
     /// </summary>
-    [Guid("30961379-4609-4a41-998e-54fe567ee0c1"),
-     SuppressMessage("ReSharper", "InconsistentNaming")]
-    public interface IDXGIResource1 : IDXGIResource
+    /// <seealso cref="DirectX.NET.DXGI.DXGIResource" />
+    /// <seealso cref="DirectX.NET.DXGI.Interfaces.IDXGIResource1" />
+    public class DXGIResource1 : DXGIResource, IDXGIResource1
     {
+        /// <summary>
+        ///     The last method identifier
+        /// </summary>
+        protected new const uint LastMethodId = DXGIResource.LastMethodId + 2u;
+
+        /// <summary>
+        ///     The methods count
+        /// </summary>
+        protected new readonly int MethodsCount = typeof(IDXGIResource1).GetMethods().Length;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="DXGIResource" /> class.
+        /// </summary>
+        /// <param name="objectPtr">The object PTR.</param>
+        public DXGIResource1(IntPtr objectPtr) : base(objectPtr)
+        {
+            AddMethodsToVTableList(base.MethodsCount, ref MethodsCount);
+        }
+
         /// <summary>
         ///     Creates a subresource surface object.
         /// </summary>
@@ -24,7 +43,10 @@ namespace DirectX.NET.DXGI.Interfaces
         ///     surface object at the position specified by the index parameter.
         /// </param>
         /// <returns></returns>
-        int CreateSubresourceSurface(uint index, out IDXGISurface2 surface);
+        public int CreateSubresourceSurface(uint index, out IDXGISurface2 surface)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates a handle to a shared resource. You can then use the returned handle with multiple Direct3D devices.
@@ -36,7 +58,11 @@ namespace DirectX.NET.DXGI.Interfaces
         ///     case sensitive.
         /// </param>
         /// <returns></returns>
-        int CreateSharedHandle(in SecurityAttributes securityAttributes, DXGISharedResourceAccess sharedResourceAccess,
-            string name);
+        public int CreateSharedHandle(in SecurityAttributes securityAttributes,
+            DXGISharedResourceAccess sharedResourceAccess,
+            string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

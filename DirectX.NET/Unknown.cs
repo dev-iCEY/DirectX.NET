@@ -43,7 +43,7 @@ namespace DirectX.NET
             }
 
             Pointer = objectPtr;
-            AddMethodsToVTableList(0, MethodsCount);
+            AddMethodsToVTableList(0, ref MethodsCount);
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace DirectX.NET
         /// </summary>
         /// <param name="startMethodId">The start method identifier.</param>
         /// <param name="methodsCount">The methods count.</param>
-        protected void AddMethodsToVTableList(int startMethodId, int methodsCount)
+        protected void AddMethodsToVTableList(int startMethodId, ref int methodsCount)
         {
             IntPtr virtualTablePtr = Marshal.ReadIntPtr(this);
 
@@ -218,6 +218,8 @@ namespace DirectX.NET
             {
                 VirtualTableAddresses.Add(Marshal.ReadIntPtr(virtualTablePtr, i * IntPtr.Size));
             }
+
+            methodsCount = startMethodId + methodsCount;
         }
 
         /// <summary>

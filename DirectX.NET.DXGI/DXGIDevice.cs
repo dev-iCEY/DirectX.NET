@@ -32,8 +32,7 @@ namespace DirectX.NET.DXGI
         /// <param name="objectPtr">The object PTR.</param>
         public DXGIDevice(IntPtr objectPtr) : base(objectPtr)
         {
-            AddMethodsToVTableList(base.MethodsCount, MethodsCount);
-            MethodsCount = base.MethodsCount + MethodsCount;
+            AddMethodsToVTableList(base.MethodsCount, ref MethodsCount);
         }
 
         /// <summary>

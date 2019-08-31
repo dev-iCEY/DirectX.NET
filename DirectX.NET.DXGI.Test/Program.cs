@@ -1,8 +1,9 @@
 ﻿#region Usings
 
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using DirectX.NET.DXGI.Interfaces;
+using DirectX.NET.Interfaces;
 
 #endregion
 
@@ -10,90 +11,143 @@ namespace DirectX.NET.DXGI.Test
 {
     public static class DXGIProgram
     {
-        public static void Main()
+        public static int Main()
         {
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            using (IDXGIFactory factory = new DXGIFactory())
+            int result;
+
+            using (IDXGIFactory1 factory1 = new DXGIFactory1())
             {
+                LinkedList<IDXGIAdapter1> adapters = new LinkedList<IDXGIAdapter1>();
+
                 uint adapterId = 0;
-
-                while (factory.EnumAdapters(adapterId, out IDXGIAdapter adapter) == 0)
+                while ((result = factory1.EnumAdapters1(adapterId, out IDXGIAdapter1 currentAdapter)) == 0)
                 {
-                    using (adapter)
+                    adapterId++;
+                    result = currentAdapter.GetDesc1(out DXGIAdapterDescription1 adapterDescription);
+
+                    if (result != 0)
                     {
-                        if (adapter.GetDesc(out DXGIAdapterDescription adapterDescription) == 0)
+                        foreach (IDXGIAdapter1 dxgiAdapter1 in adapters)
                         {
-                            Console.Write("Adapter: {0}", adapterDescription.Description);
-
-                            uint outputId = 0;
-                            bool hasAnyOutputs = false;
-                            while (adapter.EnumOutputs(outputId, out IDXGIOutput output) == 0)
-                            {
-                                using (output)
-                                {
-                                    if (!hasAnyOutputs)
-                                    {
-                                        hasAnyOutputs = true;
-                                    }
-
-                                    if (output.GetDesc(out DXGIOutputDescription outputDescription) == 0)
-                                    {
-                                        Console.Write(", have output #{1}: {0}", outputDescription.DeviceName, outputId);
-
-                                        Array array = Enum.GetValues(typeof(DXGIFormat));
-
-                                        foreach (DXGIFormat format in array)
-                                        {
-                                            uint numModes = 0;
-                                            if (output.GetDisplayModeList(format, 0, ref numModes) != 0)
-                                            {
-                                                continue;
-                                            }
-
-                                            if (numModes == 0)
-                                            {
-                                                continue;
-                                            }
-
-                                            Console.Write(", and support Format {1} modes count: {0}\n", numModes, format);
-                                            DXGIModeDescription[] modeDescriptions = new DXGIModeDescription[numModes];
-                                            if (output.GetDisplayModeList(format, 0, ref numModes, modeDescriptions) != 0)
-                                            {
-                                                continue;
-                                            }
-
-                                            foreach (DXGIModeDescription description in modeDescriptions)
-                                            {
-                                                Console.WriteLine("   ├─{0}", description);
-                                            }
-
-                                            Console.WriteLine();
-                                        }
-                                    }
-                                }
-
-                                outputId++;
-                            }
-
-                            if (!hasAnyOutputs)
-                            {
-                                Console.Write(", have no outputs!");
-                            }
-
-                            Console.WriteLine();
+                            dxgiAdapter1.Dispose();
                         }
 
-                        adapterId++;
+                        return 1;
+                    }
+
+                    if ((adapterDescription.Flags & DXGIAdapterFlag.Software) != 0)
+                    {
+                        currentAdapter.Dispose();
+                        continue;
+                    }
+
+                    adapters.AddLast(currentAdapter);
+                }
+
+                if (adapters.Count == 0)
+                {
+                    foreach (IDXGIAdapter1 dxgiAdapter1 in adapters)
+                    {
+                        dxgiAdapter1.Dispose();
+                    }
+
+                    return 2;
+                }
+
+                FeatureLevel[] featureLevels =
+                {
+                    FeatureLevel.Level_12_1,
+                    FeatureLevel.Level_12_0,
+                    FeatureLevel.Level_11_1,
+                    FeatureLevel.Level_11_0,
+                    FeatureLevel.Level_10_1,
+                    FeatureLevel.Level_10_0,
+                    FeatureLevel.Level_9_3,
+                    FeatureLevel.Level_9_2,
+                    FeatureLevel.Level_9_1
+                };
+
+                result = DXGINativeMethods.D3D11CreateDevice
+                (
+                    adapters.First.Value,
+                    DriverType.Unknown,
+                    IntPtr.Zero,
+                    0x2,
+                    featureLevels,
+                    7u,
+                    out IUnknown d3d11Device,
+                    out FeatureLevel selectedLevel,
+                    out IUnknown d3d11DeviceContext
+                );
+
+                if (result != 0)
+                {
+                    foreach (IDXGIAdapter1 dxgiAdapter1 in adapters)
+                    {
+                        dxgiAdapter1.Dispose();
+                    }
+
+                    return 3;
+                }
+
+                using (d3d11Device)
+                {
+                    using (IDXGIAdapter1 adapter = adapters.First.Value)
+                    {
+                        using (d3d11DeviceContext)
+                        {
+                            result = adapter.EnumOutputs(0, out IDXGIOutput output);
+
+                            if (result != 0)
+                            {
+                                foreach (IDXGIAdapter1 dxgiAdapter1 in adapters)
+                                {
+                                    dxgiAdapter1.Dispose();
+                                }
+
+                                return 4;
+                            }
+
+                            using (output)
+                            {
+                                result = output.QueryInterface(typeof(IDXGIOutput1).GUID, out IntPtr output1Ptr);
+                                if (result != 0)
+                                {
+                                    foreach (IDXGIAdapter1 dxgiAdapter1 in adapters)
+                                    {
+                                        dxgiAdapter1.Dispose();
+                                    }
+
+                                    return 5;
+                                }
+
+                                using (IDXGIOutput1 output1 = new DXGIOutput1(output1Ptr))
+                                {
+                                    result = output1.DuplicateOutput(d3d11Device,
+                                        out IDXGIOutputDuplication duplicationOutput);
+
+                                    if (result != 0)
+                                    {
+                                        foreach (IDXGIAdapter1 dxgiAdapter1 in adapters)
+                                        {
+                                            dxgiAdapter1.Dispose();
+                                        }
+
+                                        return 6;
+                                    }
+
+                                    duplicationOutput.GetDesc(out DXGIOutDuplDescription duplDescription);
+
+                                    duplicationOutput.ReleaseFrame();
+                                    duplicationOutput.Dispose();
+                                }
+                            }
+                        }
                     }
                 }
             }
 
-            sw.Stop();
-
-            Console.WriteLine($"{sw.ElapsedMilliseconds}ms");
-
-            Console.ReadKey(true);
+            return result;
         }
     }
 }

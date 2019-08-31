@@ -71,13 +71,13 @@ namespace DirectX.NET.DXGI.Interfaces
         /// </summary>
         /// <param name="modeMatch">The mode match.</param>
         /// <param name="closestMatch">The closest match.</param>
-        /// <param name="device">The device.</param>
+        /// <param name="concernedDevice">The device.</param>
         /// <returns></returns>
         int FindClosestMatchingMode
         (
             in DXGIModeDescription modeMatch,
             out DXGIModeDescription closestMatch,
-            IUnknown device
+            IUnknown concernedDevice
         );
 
         /// <summary>

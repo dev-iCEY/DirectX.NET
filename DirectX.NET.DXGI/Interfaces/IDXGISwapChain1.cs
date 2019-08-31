@@ -24,9 +24,9 @@ namespace DirectX.NET.DXGI.Interfaces
 
         int GetHwnd(out IntPtr hwnd);
 
-        int GetCoreWindow(ref Guid riid, out IntPtr pUnknown);
+        int GetCoreWindow(in Guid riid, out IntPtr pUnknown);
 
-        int Present1(uint syncInterval, DXGIPresentFlags flags, in DXGIPresentParameters presentParameters);
+        int Present1(uint syncInterval, DXGIPresentFlags flags, ref DXGIPresentParameters presentParameters);
 
         bool IsTemporaryMonoSupported();
 

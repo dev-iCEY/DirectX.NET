@@ -30,7 +30,7 @@ namespace DirectX.NET.DXGI
         /// <summary>
         ///     Initializes a new instance of the <see cref="DXGIFactory1" /> class.
         /// </summary>
-        public DXGIFactory1() : this(NativeMethods.CreateFactory1())
+        public DXGIFactory1() : this(DXGINativeMethods.CreateFactory1())
         {
         }
 
@@ -40,8 +40,7 @@ namespace DirectX.NET.DXGI
         /// <param name="objectPtr"></param>
         public DXGIFactory1(IntPtr objectPtr) : base(objectPtr)
         {
-            AddMethodsToVTableList(base.MethodsCount, MethodsCount);
-            MethodsCount = base.MethodsCount + MethodsCount;
+            AddMethodsToVTableList(base.MethodsCount, ref MethodsCount);
         }
 
         /// <summary>

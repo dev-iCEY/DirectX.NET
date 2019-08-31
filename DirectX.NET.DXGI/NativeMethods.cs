@@ -10,17 +10,8 @@ namespace DirectX.NET.DXGI
 {
     /// <summary>
     /// </summary>
-    public static class NativeMethods
+    public static class DXGINativeMethods
     {
-        /// <summary>
-        ///     Creates the dxgi factory.
-        /// </summary>
-        /// <param name="riid">The riid.</param>
-        /// <param name="factory">The factory.</param>
-        /// <returns></returns>
-        [DllImport("dxgi.dll", PreserveSig = true)]
-        public static extern int CreateDXGIFactory(in Guid riid, out IntPtr factory);
-
         internal static IntPtr CreateFactory()
         {
             int result = CreateDXGIFactory(typeof(IDXGIFactory).GUID, out IntPtr factoryPtr);
@@ -45,6 +36,18 @@ namespace DirectX.NET.DXGI
             return factoryPtr;
         }
 
+        internal static IntPtr CreateFactory2()
+        {
+            int result = CreateDXGIFactory1(typeof(IDXGIFactory2).GUID, out IntPtr factoryPtr);
+
+            if (result != 0)
+            {
+                throw Marshal.GetExceptionForHR(result);
+            }
+
+            return factoryPtr;
+        }
+
         /// <summary>
         ///     Creates the dxgi factory1.
         /// </summary>
@@ -52,6 +55,15 @@ namespace DirectX.NET.DXGI
         /// <param name="factory1">The factory1.</param>
         /// <returns></returns>
         [DllImport("dxgi.dll", PreserveSig = true)]
-        public static extern int CreateDXGIFactory1(in Guid riid, out IntPtr factory1);
+        private static extern int CreateDXGIFactory1(in Guid riid, out IntPtr factory1);
+
+        /// <summary>
+        ///     Creates the dxgi factory.
+        /// </summary>
+        /// <param name="riid">The riid.</param>
+        /// <param name="factory">The factory.</param>
+        /// <returns></returns>
+        [DllImport("dxgi.dll", PreserveSig = true)]
+        private static extern int CreateDXGIFactory(in Guid riid, out IntPtr factory);
     }
 }

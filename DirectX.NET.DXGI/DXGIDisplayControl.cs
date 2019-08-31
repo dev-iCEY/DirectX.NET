@@ -36,8 +36,7 @@ namespace DirectX.NET.DXGI
         public DXGIDisplayControl(IntPtr objectPtr) :
             base(objectPtr)
         {
-            AddMethodsToVTableList(base.MethodsCount, MethodsCount);
-            MethodsCount = base.MethodsCount + MethodsCount;
+            AddMethodsToVTableList(base.MethodsCount, ref MethodsCount);
         }
 
         /// <summary>

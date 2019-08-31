@@ -40,14 +40,21 @@
   <ItemGroup>
     <Compile Include="DXGIAdapter.cs" />
     <Compile Include="DXGIAdapter1.cs" />
+    <Compile Include="DXGIAdapter2.cs" />
     <Compile Include="DXGIDevice.cs" />
     <Compile Include="DXGIDevice1.cs" />
+    <Compile Include="DXGIDevice2.cs" />
     <Compile Include="DXGIDisplayControl.cs" />
     <Compile Include="DXGIFactory1.cs" />
     <Compile Include="DXGIDeviceSubObject.cs" />
+    <Compile Include="DXGIFactory2.cs" />
+    <Compile Include="DXGIOutput1.cs" />
+    <Compile Include="DXGIOutputDuplication.cs" />
+    <Compile Include="DXGIResource1.cs" />
     <Compile Include="DXGISurface.cs" />
     <Compile Include="DXGIKeyedMutex.cs" />
     <Compile Include="DXGIObject.cs" />
+    <Compile Include="DXGISwapChain1.cs" />
     <Compile Include="Enums\DXGIAdapterFlag.cs" />
     <Compile Include="Enums\DXGIColorSpaceType.cs" />
     <Compile Include="Enums\DXGICpuAccess.cs" />
@@ -71,8 +78,11 @@
     <Compile Include="Enums\DXGIAlphaMode.cs" />
     <Compile Include="Enums\DXGIOfferResourcePriority.cs" />
     <Compile Include="Enums\DXGIScaling.cs" />
+    <Compile Include="Enums\DXGIGraphicsPreemptionGranularity.cs" />
+    <Compile Include="Enums\DXGIComputePreemptionGranularity.cs" />
     <Compile Include="Interfaces\IDXGIAdapter.cs" />
     <Compile Include="Interfaces\IDXGIAdapter1.cs" />
+    <Compile Include="Interfaces\IDXGIAdapter2.cs" />
     <Compile Include="Interfaces\IDXGIDevice.cs" />
     <Compile Include="Interfaces\IDXGIDevice1.cs" />
     <Compile Include="Interfaces\IDXGIDevice2.cs" />
@@ -80,9 +90,11 @@
     <Compile Include="Interfaces\IDXGIDisplayControl.cs" />
     <Compile Include="Interfaces\IDXGIFactory.cs" />
     <Compile Include="Interfaces\IDXGIFactory1.cs" />
+    <Compile Include="Interfaces\IDXGIFactory2.cs" />
     <Compile Include="Interfaces\IDXGIKeyedMutex.cs" />
     <Compile Include="Interfaces\IDXGIObject.cs" />
     <Compile Include="Interfaces\IDXGIOutput.cs" />
+    <Compile Include="Interfaces\IDXGIOutput1.cs" />
     <Compile Include="Interfaces\IDXGIOutputDuplication.cs" />
     <Compile Include="Interfaces\IDXGIResource.cs" />
     <Compile Include="Interfaces\IDXGIResource1.cs" />
@@ -113,6 +125,7 @@
     <Compile Include="Structs\DXGISwapChainDescription1.cs" />
     <Compile Include="Structs\DXGISwapChainFullscreenDescription.cs" />
     <Compile Include="Structs\DXGIPresentParameters.cs" />
+    <Compile Include="Structs\DXGIAdapterDescription2.cs" />
     <Compile Include="Structs\LargeInteger.cs" />
     <Compile Include="Structs\Luid.cs" />
     <Compile Include="Structs\DXGIMappedRect.cs" />
@@ -137,6 +150,5 @@
       <Name>DirectX.NET</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
