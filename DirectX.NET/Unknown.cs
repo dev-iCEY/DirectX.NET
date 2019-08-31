@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using DirectX.NET.Interfaces;
@@ -11,7 +12,8 @@ using DirectX.NET.Interfaces;
 
 namespace DirectX.NET
 {
-    public class Unknown : IUnknown
+    [SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode")]
+    public class Unknown : IUnknown, IEquatable<Unknown>
     {
         /// <summary>
         ///     The last method identifier.
@@ -23,12 +25,21 @@ namespace DirectX.NET
         /// </summary>
         protected readonly int MethodsCount = typeof(IUnknown).GetMethods().Length;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Unknown" /> class by unmanaged pointer to
+        ///     <seealso cref="Interfaces.IUnknown" />.
+        /// </summary>
+        /// <param name="objectPtr">Unmanaged pointer to COM object.</param>
+        /// <exception cref="ArgumentException">IUnknown object pointer cannot be IntPtr.Zero or null. - objectPtr</exception>
         public Unknown(IntPtr objectPtr)
         {
             if (IntPtr.Zero == objectPtr)
             {
-                throw new ArgumentException("IUnknown object pointer cannot be IntPtr.Zero or null.",
-                    nameof(objectPtr));
+                throw new ArgumentException
+                (
+                    "IUnknown object pointer cannot be IntPtr.Zero or null.",
+                    nameof(objectPtr)
+                );
             }
 
             Pointer = objectPtr;
@@ -66,6 +77,14 @@ namespace DirectX.NET
         ///     The virtual table addresses.
         /// </value>
         protected List<IntPtr> VirtualTableAddresses { get; private set; } = new List<IntPtr>();
+
+        public bool Equals(Unknown other)
+        {
+            return other != null &&
+                   MethodsCount == other.MethodsCount &&
+                   Pointer.Equals(other.Pointer) &&
+                   IsDisposed == other.IsDisposed;
+        }
 
         /// <summary>
         ///     Выполняет определяемые приложением задачи, связанные с удалением, высвобождением или сбросом неуправляемых
@@ -112,9 +131,43 @@ namespace DirectX.NET
 
 #if DEBUG
             Trace.WriteLine($"{typeof(Unknown).Namespace} — {this}.Release() return value: {result}", "DEBUG");
-#endif
-
             return result;
+#endif
+        }
+
+        /// <summary>Определяет, равен ли заданный объект текущему объекту.</summary>
+        /// <param name="obj">Объект, который требуется сравнить с текущим объектом.</param>
+        /// <returns>
+        ///     Значение <see langword="true" />, если указанный объект равен текущему объекту; в противном случае — значение
+        ///     <see langword="false" />.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            if (obj is null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            return obj.GetType() == GetType() && Equals((Unknown) obj);
+        }
+
+        /// <summary>Служит хэш-функцией по умолчанию.</summary>
+        /// <returns>Хэш-код для текущего объекта.</returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = MethodsCount;
+                hashCode = (hashCode * 397) ^ Pointer.GetHashCode();
+                hashCode = (hashCode * 397) ^ IsDisposed.GetHashCode();
+                hashCode = (hashCode * 397) ^ (VirtualTableAddresses != null ? VirtualTableAddresses.GetHashCode() : 0);
+                return hashCode;
+            }
         }
 
         /// <summary>
@@ -200,13 +253,43 @@ namespace DirectX.NET
             return obj.Pointer;
         }
 
-        [ComMethodId(0u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate int QueryInterfaceDelegate(IntPtr selfPtr, in Guid riid, out IntPtr unknownObjectPtr);
+        public static bool operator ==(Unknown left, Unknown right)
+        {
+            if (EqualityComparer<Unknown>.Default.Equals(left, null) ||
+                EqualityComparer<Unknown>.Default.Equals(right, null))
+            {
+                return false;
+            }
 
-        [ComMethodId(1u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+            return left?.Pointer == right?.Pointer;
+        }
+
+        public static bool operator !=(Unknown left, Unknown right)
+        {
+            if (EqualityComparer<Unknown>.Default.Equals(left, null) ||
+                EqualityComparer<Unknown>.Default.Equals(right, null))
+            {
+                return false;
+            }
+
+            return left?.Pointer != right?.Pointer;
+        }
+
+        [ComMethodId(0u),
+         UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        private delegate int QueryInterfaceDelegate
+        (
+            IntPtr selfPtr,
+            in Guid riid,
+            out IntPtr unknownObjectPtr
+        );
+
+        [ComMethodId(1u),
+         UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate uint AddRefDelegate(IntPtr selfPtr);
 
-        [ComMethodId(2u), UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [ComMethodId(2u),
+         UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate uint ReleaseDelegate(IntPtr selfPtr);
     }
 }

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B7EEDB86-5697-4009-9926-6FC0D8CDF5AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DirectX.NET.DXGI</RootNamespace>
+    <AssemblyName>DirectX.NET.DXGI</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
+    <DocumentationFile>bin\Debug\DirectX.NET.DXGI.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\DirectX.NET.DXGI.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DXGIAdapter.cs" />
+    <Compile Include="DXGIAdapter1.cs" />
+    <Compile Include="DXGIDevice.cs" />
+    <Compile Include="DXGIDevice1.cs" />
+    <Compile Include="DXGIDisplayControl.cs" />
+    <Compile Include="DXGIFactory1.cs" />
+    <Compile Include="DXGIDeviceSubObject.cs" />
+    <Compile Include="DXGISurface.cs" />
+    <Compile Include="DXGIKeyedMutex.cs" />
+    <Compile Include="DXGIObject.cs" />
+    <Compile Include="Enums\DXGIAdapterFlag.cs" />
+    <Compile Include="Enums\DXGIColorSpaceType.cs" />
+    <Compile Include="Enums\DXGICpuAccess.cs" />
+    <Compile Include="Enums\DXGIEnumModes.cs" />
+    <Compile Include="Enums\DXGIFormat.cs" />
+    <Compile Include="Enums\DXGISharedResourceAccess.cs" />
+    <Compile Include="Enums\DXGISwapChainFlag.cs" />
+    <Compile Include="Enums\DXGIMap.cs" />
+    <Compile Include="Enums\DXGIModeRotation.cs" />
+    <Compile Include="Enums\DXGIModeScaling.cs" />
+    <Compile Include="Enums\DXGIModeScanlineOrder.cs" />
+    <Compile Include="Enums\DXGIPresentFlags.cs" />
+    <Compile Include="Enums\DXGIResidency.cs" />
+    <Compile Include="Enums\DXGIResourcePriority.cs" />
+    <Compile Include="Enums\DXGISwapChainFlagExtensions.cs" />
+    <Compile Include="Enums\DXGISwapEffect.cs" />
+    <Compile Include="Enums\DXGIUsage.cs" />
+    <Compile Include="Enums\DXGIWindowAssociationFlags.cs" />
+    <Compile Include="DXGIFactory.cs" />
+    <Compile Include="Enums\DXGIOutDuplPointerShapeType.cs" />
+    <Compile Include="Enums\DXGIAlphaMode.cs" />
+    <Compile Include="Enums\DXGIOfferResourcePriority.cs" />
+    <Compile Include="Enums\DXGIScaling.cs" />
+    <Compile Include="Interfaces\IDXGIAdapter.cs" />
+    <Compile Include="Interfaces\IDXGIAdapter1.cs" />
+    <Compile Include="Interfaces\IDXGIDevice.cs" />
+    <Compile Include="Interfaces\IDXGIDevice1.cs" />
+    <Compile Include="Interfaces\IDXGIDevice2.cs" />
+    <Compile Include="Interfaces\IDXGIDeviceSubObject.cs" />
+    <Compile Include="Interfaces\IDXGIDisplayControl.cs" />
+    <Compile Include="Interfaces\IDXGIFactory.cs" />
+    <Compile Include="Interfaces\IDXGIFactory1.cs" />
+    <Compile Include="Interfaces\IDXGIKeyedMutex.cs" />
+    <Compile Include="Interfaces\IDXGIObject.cs" />
+    <Compile Include="Interfaces\IDXGIOutput.cs" />
+    <Compile Include="Interfaces\IDXGIOutputDuplication.cs" />
+    <Compile Include="Interfaces\IDXGIResource.cs" />
+    <Compile Include="Interfaces\IDXGIResource1.cs" />
+    <Compile Include="Interfaces\IDXGISurface.cs" />
+    <Compile Include="Interfaces\IDXGISurface1.cs" />
+    <Compile Include="Interfaces\IDXGISurface2.cs" />
+    <Compile Include="Interfaces\IDXGISwapChain.cs" />
+    <Compile Include="Interfaces\IDXGISwapChain1.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="DXGIOutput.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DXGIResource.cs" />
+    <Compile Include="Structs\DXGIAdapterDescription.cs" />
+    <Compile Include="Structs\DXGIAdapterDescription1.cs" />
+    <Compile Include="Structs\DXGIDisplayColorSpace.cs" />
+    <Compile Include="Structs\DXGIFrameStatistics.cs" />
+    <Compile Include="Structs\DXGIGammaControl.cs" />
+    <Compile Include="Structs\DXGIGammaControlCapabilities.cs" />
+    <Compile Include="Structs\DXGIJpegAcHuffmanTable.cs" />
+    <Compile Include="Structs\DXGIJpegDcHuffmanTable.cs" />
+    <Compile Include="Structs\DXGIJpegQuantizationTable.cs" />
+    <Compile Include="Structs\DXGIOutDuplDescription.cs" />
+    <Compile Include="Structs\DXGIOutDuplFrameInfo.cs" />
+    <Compile Include="Structs\DXGIOutDuplMoveRect.cs" />
+    <Compile Include="Structs\DXGIOutDuplPointerPosition.cs" />
+    <Compile Include="Structs\DXGIOutDuplPointerShapeInfo.cs" />
+    <Compile Include="Structs\DXGIModeDescription1.cs" />
+    <Compile Include="Structs\DXGISwapChainDescription1.cs" />
+    <Compile Include="Structs\DXGISwapChainFullscreenDescription.cs" />
+    <Compile Include="Structs\DXGIPresentParameters.cs" />
+    <Compile Include="Structs\LargeInteger.cs" />
+    <Compile Include="Structs\Luid.cs" />
+    <Compile Include="Structs\DXGIMappedRect.cs" />
+    <Compile Include="Structs\DXGIModeDescription.cs" />
+    <Compile Include="Structs\DXGIOutputDescription.cs" />
+    <Compile Include="Structs\Point.cs" />
+    <Compile Include="Structs\DXGIRational.cs" />
+    <Compile Include="Structs\Rect.cs" />
+    <Compile Include="Structs\DXGIRgb.cs" />
+    <Compile Include="Structs\Rgba.cs" />
+    <Compile Include="Structs\DXGISampleDescription.cs" />
+    <Compile Include="Structs\SecurityAttributes.cs" />
+    <Compile Include="Structs\DXGISharedResource.cs" />
+    <Compile Include="Structs\DXGISurfaceDescription.cs" />
+    <Compile Include="Structs\DXGISwapChainDescription.cs" />
+    <Compile Include="DXGISurface1.cs" />
+    <Compile Include="DXGISwapChain.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DirectX.NET\DirectX.NET.csproj">
+      <Project>{54d98491-6d7a-4e51-b24b-e5d26e8c868e}</Project>
+      <Name>DirectX.NET</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

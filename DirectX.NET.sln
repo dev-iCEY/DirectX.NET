@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.152
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{E19050D8-AF6C-419E-A74C-1FB71B1A2339}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectX.NET", "DirectX.NET\DirectX.NET.csproj", "{54D98491-6D7A-4E51-B24B-E5D26E8C868E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectX.DXGI.NET", "DirectX.DXGI.NET\DirectX.DXGI.NET.csproj", "{B7EEDB86-5697-4009-9926-6FC0D8CDF5AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectX.NET.DXGI", "DirectX.NET.DXGI\DirectX.NET.DXGI.csproj", "{B7EEDB86-5697-4009-9926-6FC0D8CDF5AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectX.DXGI.NET.Test", "DirectX.DXGI.NET.Test\DirectX.DXGI.NET.Test.csproj", "{7B2B475C-8756-4838-9691-019A944B1001}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectX.NET.DXGI.Test", "DirectX.NET.DXGI.Test\DirectX.NET.DXGI.Test.csproj", "{7B2B475C-8756-4838-9691-019A944B1001}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
